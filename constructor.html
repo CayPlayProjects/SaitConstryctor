@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0027)file:///D:/constructor.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiteForge — визуальный конструктор сайтов</title>
     <style>
@@ -38,8 +38,8 @@
 
         /* ========== ЛЕВАЯ ПАНЕЛЬ ========== */
         .sidebar {
-            width: 380px;
-            min-width: 380px;
+            width: 400px;
+            min-width: 400px;
             height: 100vh;
             background: var(--bg);
             border-right: 1px solid #27272a;
@@ -238,22 +238,15 @@
             width: 100%;
             accent-color: #a78bfa;
         }
-        .color-presets {
+        .setting-row-inline {
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
+            gap: 10px;
         }
-        .color-preset {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        .color-preset:hover {
-            border-color: #fff;
-            transform: scale(1.15);
+        .setting-row-inline>div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .sidebar-footer {
@@ -510,20 +503,26 @@
         </div>
 
         <div class="sidebar-nav" id="sidebarNav">
-            <div class="nav-item active" data-panel="panel-bg">
-                <span class="icon">🎨</span> Фон<span class="badge">цвет</span>
+            <div class="nav-item" data-panel="panel-bg">
+                <span class="icon">🎨</span> Фон и стили<span class="badge">основа</span>
             </div>
             <div class="nav-item" data-panel="panel-header">
-                <span class="icon">📋</span> Шапка<span class="badge">меню</span>
+                <span class="icon">📋</span> Шапка и меню<span class="badge">header</span>
             </div>
             <div class="nav-item" data-panel="panel-hero">
                 <span class="icon">🚀</span> Главный блок<span class="badge">hero</span>
             </div>
-            <div class="nav-item" data-panel="panel-cards">
-                <span class="icon">🃏</span> Карточки<span class="badge">услуги</span>
+            <div class="nav-item" data-panel="panel-buttons">
+                <span class="icon">🔘</span> Кнопки и ссылки<span class="badge">интерактив</span>
             </div>
-            <div class="nav-item" data-panel="panel-footer">
-                <span class="icon">📌</span> Подвал<span class="badge">footer</span>
+            <div class="nav-item" data-panel="panel-cards">
+                <span class="icon">🃏</span> Карточки услуг<span class="badge">контент</span>
+            </div>
+            <div class="nav-item" data-panel="panel-sections">
+                <span class="icon">📑</span> Доп. секции<span class="badge">страницы</span>
+            </div>
+            <div class="nav-item active" data-panel="panel-footer">
+                <span class="icon">📌</span> Подвал сайта<span class="badge">footer</span>
             </div>
             <div class="nav-item" data-panel="panel-typography">
                 <span class="icon">🔤</span> Типографика<span class="badge">шрифты</span>
@@ -531,7 +530,7 @@
         </div>
 
         <!-- Панели настроек -->
-        <div class="settings-panel visible" id="panel-bg">
+        <div class="settings-panel" id="panel-bg">
             <div class="setting-group">
                 <h3>🎨 Фон сайта</h3>
                 <div class="setting-row">
@@ -546,11 +545,11 @@
                     <label>Основной цвет</label>
                     <input type="color" id="bgColor" value="#f0f4ff">
                 </div>
-                <div class="setting-row" id="gradientRow">
+                <div class="setting-row" id="gradientRow" style="display: flex;">
                     <label>Второй цвет градиента</label>
                     <input type="color" id="bgColor2" value="#e8ecf8">
                 </div>
-                <div class="setting-row" id="gradientDirRow">
+                <div class="setting-row" id="gradientDirRow" style="display: flex;">
                     <label>Направление</label>
                     <select id="gradientDir">
                         <option value="to bottom right">↘ По диагонали</option>
@@ -562,6 +561,17 @@
                 <div class="setting-row" id="imageUrlRow" style="display:none;">
                     <label>URL изображения</label>
                     <input type="text" id="bgImageUrl" placeholder="https://images.unsplash.com/...">
+                </div>
+            </div>
+            <div class="setting-group">
+                <h3>🌐 Общие цвета</h3>
+                <div class="setting-row">
+                    <label>Цвет текста сайта</label>
+                    <input type="color" id="bodyTextColor" value="#1a1a2e">
+                </div>
+                <div class="setting-row">
+                    <label>Акцентный цвет (ссылки, кнопки)</label>
+                    <input type="color" id="accentColor" value="#7c3aed">
                 </div>
             </div>
         </div>
@@ -578,12 +588,19 @@
                     <input type="color" id="headerBg" value="#1e1e2e">
                 </div>
                 <div class="setting-row">
-                    <label>Цвет текста</label>
+                    <label>Цвет текста шапки</label>
                     <input type="color" id="headerTextColor" value="#ffffff">
                 </div>
                 <div class="setting-row">
                     <label>Пункты меню (через запятую)</label>
-                    <input type="text" id="menuItems" value="Главная, О нас, Портфолио, Контакты">
+                    <input type="text" id="menuItems" value="Главная, Услуги, Портфолио, Контакты">
+                </div>
+                <div class="setting-row">
+                    <label>Закрепить шапку при скролле</label>
+                    <select id="stickyHeader">
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -600,12 +617,85 @@
                     <textarea id="heroSubtitle">Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.</textarea>
                 </div>
                 <div class="setting-row">
-                    <label>Текст кнопки</label>
-                    <input type="text" id="heroBtnText" value="Попробовать">
+                    <label>Фоновое изображение Hero (URL, необязательно)</label>
+                    <input type="text" id="heroBgImage" placeholder="https://images.unsplash.com/...">
                 </div>
                 <div class="setting-row">
-                    <label>Цвет кнопки</label>
-                    <input type="color" id="heroBtnColor" value="#7c3aed">
+                    <label>Высота блока (px)</label>
+                    <input type="range" id="heroHeight" min="300" max="900" value="500">
+                    <span style="font-size:0.7rem;color:#71717a" id="heroHeightValue">500px</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="panel-buttons">
+            <div class="setting-group">
+                <h3>🔘 Главная кнопка (Hero)</h3>
+                <div class="setting-row">
+                    <label>Текст кнопки</label>
+                    <input type="text" id="heroBtnText" value="Смотреть услуги">
+                </div>
+                <div class="setting-row">
+                    <label>Куда ведёт (якорь #)</label>
+                    <input type="text" id="heroBtnLink" value="uslugi">
+                </div>
+                <div class="setting-row-inline">
+                    <div>
+                        <label>Цвет фона</label>
+                        <input type="color" id="heroBtnBg" value="#7c3aed">
+                    </div>
+                    <div>
+                        <label>Цвет текста</label>
+                        <input type="color" id="heroBtnTextColor" value="#ffffff">
+                    </div>
+                </div>
+                <div class="setting-row-inline">
+                    <div>
+                        <label>Скругление (px)</label>
+                        <input type="range" id="heroBtnRadius" min="0" max="50" value="12">
+                    </div>
+                    <div>
+                        <label>Размер шрифта (rem)</label>
+                        <input type="range" id="heroBtnFontSize" min="0.8" max="1.5" step="0.05" value="1">
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <h3>🔘 Кнопки в карточках</h3>
+                <div class="setting-row">
+                    <label>Показывать кнопки в карточках</label>
+                    <select id="showCardButtons">
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <label>Текст на кнопках</label>
+                    <input type="text" id="cardBtnText" value="Подробнее">
+                </div>
+                <div class="setting-row-inline">
+                    <div>
+                        <label>Цвет фона</label>
+                        <input type="color" id="cardBtnBg" value="#7c3aed">
+                    </div>
+                    <div>
+                        <label>Цвет текста</label>
+                        <input type="color" id="cardBtnTextColor" value="#ffffff">
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <h3>🔗 Ссылки в меню</h3>
+                <div class="setting-row">
+                    <label>Цвет ссылок при наведении</label>
+                    <input type="color" id="menuHoverColor" value="#a78bfa">
+                </div>
+                <div class="setting-row">
+                    <label>Подчёркивание при наведении</label>
+                    <select id="menuHoverUnderline">
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -626,12 +716,20 @@
                     <textarea id="card1Desc">Уникальный современный дизайн, выделяющий вас среди конкурентов.</textarea>
                 </div>
                 <div class="setting-row">
+                    <label>Карточка 1 — Иконка (эмодзи)</label>
+                    <input type="text" id="card1Icon" value="🎨">
+                </div>
+                <div class="setting-row">
                     <label>Карточка 2 — Название</label>
                     <input type="text" id="card2Title" value="Разработка">
                 </div>
                 <div class="setting-row">
                     <label>Карточка 2 — Описание</label>
                     <textarea id="card2Desc">Быстрая и надёжная разработка на современных технологиях.</textarea>
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 2 — Иконка (эмодзи)</label>
+                    <input type="text" id="card2Icon" value="⚡">
                 </div>
                 <div class="setting-row">
                     <label>Карточка 3 — Название</label>
@@ -642,13 +740,48 @@
                     <textarea id="card3Desc">Круглосуточная поддержка и сопровождение вашего проекта.</textarea>
                 </div>
                 <div class="setting-row">
+                    <label>Карточка 3 — Иконка (эмодзи)</label>
+                    <input type="text" id="card3Icon" value="💬">
+                </div>
+                <div class="setting-row">
                     <label>Цвет фона карточек</label>
                     <input type="color" id="cardBg" value="#ffffff">
+                </div>
+                <div class="setting-row">
+                    <label>Количество карточек в ряду</label>
+                    <select id="cardsPerRow">
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <div class="settings-panel" id="panel-footer">
+        <div class="settings-panel" id="panel-sections">
+            <div class="setting-group">
+                <h3>📑 Дополнительные секции</h3>
+                <p style="font-size:0.75rem;color:#71717a;">Настройте контент для дополнительных пунктов меню (Портфолио, Контакты и т.д.)</p>
+                <div class="setting-row">
+                    <label>Секция "Портфолио" — заголовок</label>
+                    <input type="text" id="sectionPortfolioTitle" value="Наши работы">
+                </div>
+                <div class="setting-row">
+                    <label>Секция "Портфолио" — текст</label>
+                    <textarea id="sectionPortfolioText">Здесь вы можете разместить примеры ваших работ. Галерея, кейсы, отзывы клиентов — всё, что угодно.</textarea>
+                </div>
+                <div class="setting-row">
+                    <label>Секция "Контакты" — заголовок</label>
+                    <input type="text" id="sectionContactsTitle" value="Свяжитесь с нами">
+                </div>
+                <div class="setting-row">
+                    <label>Секция "Контакты" — текст</label>
+                    <textarea id="sectionContactsText">Email: hello@siteforge.ru | Телефон: +7 (999) 123-45-67 | Адрес: г. Москва, ул. Примерная, 1</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel visible" id="panel-footer">
             <div class="setting-group">
                 <h3>📌 Подвал сайта</h3>
                 <div class="setting-row">
@@ -664,8 +797,8 @@
                     <input type="color" id="footerTextColor" value="#a0a0b8">
                 </div>
                 <div class="setting-row">
-                    <label>Соцсети (через запятую)</label>
-                    <input type="text" id="footerSocials" value="VK, Telegram, GitHub">
+                    <label>Соцсети (название:ссылка, через запятую)</label>
+                    <input type="text" id="footerSocials" value="VK:https://vk.com, Telegram:https://t.me, GitHub:https://github.com">
                 </div>
             </div>
         </div>
@@ -676,27 +809,36 @@
                 <div class="setting-row">
                     <label>Шрифт заголовков</label>
                     <select id="headingFont">
-                        <option value="'Inter', sans-serif">Inter</option>
-                        <option value="'Montserrat', sans-serif">Montserrat</option>
-                        <option value="'Playfair Display', serif">Playfair Display</option>
-                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="&#39;Inter&#39;, sans-serif">Inter</option>
+                        <option value="&#39;Montserrat&#39;, sans-serif">Montserrat</option>
+                        <option value="&#39;Playfair Display&#39;, serif">Playfair Display</option>
+                        <option value="&#39;Roboto&#39;, sans-serif">Roboto</option>
                     </select>
                 </div>
                 <div class="setting-row">
                     <label>Шрифт текста</label>
                     <select id="bodyFont">
-                        <option value="'Inter', sans-serif">Inter</option>
-                        <option value="'Roboto', sans-serif">Roboto</option>
-                        <option value="'Open Sans', sans-serif">Open Sans</option>
+                        <option value="&#39;Inter&#39;, sans-serif">Inter</option>
+                        <option value="&#39;Roboto&#39;, sans-serif">Roboto</option>
+                        <option value="&#39;Open Sans&#39;, sans-serif">Open Sans</option>
                     </select>
                 </div>
                 <div class="setting-row">
-                    <label>Скругление элементов: <span id="radiusValue">12px</span></label>
+                    <label>Общее скругление элементов: <span id="radiusValue">12px</span></label>
                     <input type="range" id="borderRadius" min="0" max="30" value="12">
                 </div>
                 <div class="setting-row">
                     <label>Масштаб заголовков: <span id="scaleValue">100%</span></label>
                     <input type="range" id="headingScale" min="80" max="150" value="100">
+                </div>
+                <div class="setting-row">
+                    <label>Тень карточек</label>
+                    <select id="cardShadow">
+                        <option value="soft">Мягкая</option>
+                        <option value="medium">Средняя</option>
+                        <option value="hard">Сильная</option>
+                        <option value="none">Без тени</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -712,29 +854,28 @@
     <div class="preview-wrapper">
         <div class="preview-toolbar">
             <div class="device-switcher">
-                <button class="device-btn active" onclick="switchDevice('desktop', this)">💻 Десктоп</button>
-                <button class="device-btn" onclick="switchDevice('tablet', this)">📱 Планшет</button>
-                <button class="device-btn" onclick="switchDevice('mobile', this)">📱 Телефон</button>
+                <button class="device-btn active" onclick="switchDevice(&#39;desktop&#39;, this)">💻 Десктоп</button>
+                <button class="device-btn" onclick="switchDevice(&#39;tablet&#39;, this)">📱 Планшет</button>
+                <button class="device-btn" onclick="switchDevice(&#39;mobile&#39;, this)">📱 Телефон</button>
             </div>
             <div class="preview-url">
                 <span class="dot"></span> Предпросмотр в реальном времени
             </div>
         </div>
         <div class="preview-stage">
-            <iframe id="previewFrame" class="desktop" title="Предпросмотр сайта" sandbox="allow-same-origin allow-scripts"></iframe>
+            <iframe id="previewFrame" class="desktop" title="Предпросмотр сайта" sandbox="allow-same-origin allow-scripts" src="./constructor_files/saved_resource.html"></iframe>
         </div>
     </div>
 
     <!-- Гайд -->
-    <div class="guide-banner" id="guideBanner">
+    <div class="guide-banner guide-hidden" id="guideBanner">
         <h4>👋 Добро пожаловать в SiteForge!</h4>
-        <p>Создайте свой сайт без единой строки кода.</p>
+        <p>Создайте сайт без кода. Все кнопки и ссылки настраиваются!</p>
         <div class="steps">
             <span>1.</span> Выберите раздел слева<br>
-            <span>2.</span> Настройте параметры<br>
+            <span>2.</span> Настройте контент и цвета<br>
             <span>3.</span> Нажмите «Применить»<br>
-            <span>4.</span> Скачайте готовый сайт!<br>
-            <span>💡</span> В шаблоне меню и кнопки рабочие!
+            <span>4.</span> Скачайте готовый сайт!
         </div>
         <button class="btn btn-primary" onclick="dismissGuide()" style="margin-top:12px;width:100%;">Понятно, приступим!</button>
     </div>
@@ -747,41 +888,65 @@
             bgColor2: '#e8ecf8',
             gradientDir: 'to bottom right',
             bgImageUrl: '',
+            bodyTextColor: '#1a1a2e',
+            accentColor: '#7c3aed',
             logoText: 'SiteForge',
             headerBg: '#1e1e2e',
             headerTextColor: '#ffffff',
             menuItems: 'Главная, Услуги, Портфолио, Контакты',
+            stickyHeader: 'yes',
             heroTitle: 'Создайте сайт своей мечты',
             heroSubtitle: 'Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.',
+            heroBgImage: '',
+            heroHeight: 500,
             heroBtnText: 'Смотреть услуги',
-            heroBtnColor: '#7c3aed',
+            heroBtnLink: 'uslugi',
+            heroBtnBg: '#7c3aed',
+            heroBtnTextColor: '#ffffff',
+            heroBtnRadius: 12,
+            heroBtnFontSize: 1,
+            showCardButtons: 'yes',
+            cardBtnText: 'Подробнее',
+            cardBtnBg: '#7c3aed',
+            cardBtnTextColor: '#ffffff',
+            menuHoverColor: '#a78bfa',
+            menuHoverUnderline: 'yes',
             cardsTitle: 'Наши услуги',
             card1Title: 'Дизайн',
             card1Desc: 'Уникальный современный дизайн, выделяющий вас среди конкурентов.',
+            card1Icon: '🎨',
             card2Title: 'Разработка',
             card2Desc: 'Быстрая и надёжная разработка на современных технологиях.',
+            card2Icon: '⚡',
             card3Title: 'Поддержка',
             card3Desc: 'Круглосуточная поддержка и сопровождение вашего проекта.',
+            card3Icon: '💬',
             cardBg: '#ffffff',
+            cardsPerRow: '3',
+            sectionPortfolioTitle: 'Наши работы',
+            sectionPortfolioText: 'Здесь вы можете разместить примеры ваших работ. Галерея, кейсы, отзывы клиентов — всё, что угодно.',
+            sectionContactsTitle: 'Свяжитесь с нами',
+            sectionContactsText: 'Email: hello@siteforge.ru | Телефон: +7 (999) 123-45-67 | Адрес: г. Москва, ул. Примерная, 1',
             footerText: '© 2026 SiteForge. Все права защищены.',
             footerBg: '#1e1e2e',
             footerTextColor: '#a0a0b8',
-            footerSocials: 'VK, Telegram, GitHub',
+            footerSocials: 'VK:https://vk.com, Telegram:https://t.me, GitHub:https://github.com',
             headingFont: "'Inter', sans-serif",
             bodyFont: "'Inter', sans-serif",
             borderRadius: 12,
-            headingScale: 100
+            headingScale: 100,
+            cardShadow: 'soft'
         };
 
         let settings = loadSettings();
 
         function loadSettings() {
-            const saved = localStorage.getItem('siteforge_settings');
+            const saved = localStorage.getItem('siteforge_settings_v2');
             return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultSettings));
         }
 
         function saveSettings() {
-            localStorage.setItem('siteforge_settings', JSON.stringify(settings));
+            localStorage.setItem('siteforge_settings_v2', JSON.stringify(settings));
         }
 
         // ===== ИНИЦИАЛИЗАЦИЯ =====
@@ -792,8 +957,7 @@
             setupAutoSave();
             setupRangeLabels();
             updateBgVisibility();
-            // Гайд показываем 1 раз
-            if (localStorage.getItem('siteforge_guide_dismissed')) {
+            if (localStorage.getItem('siteforge_guide_dismissed_v2')) {
                 document.getElementById('guideBanner').classList.add('guide-hidden');
             }
         }
@@ -805,22 +969,46 @@
             document.getElementById('bgColor2').value = s.bgColor2;
             document.getElementById('gradientDir').value = s.gradientDir;
             document.getElementById('bgImageUrl').value = s.bgImageUrl || '';
+            document.getElementById('bodyTextColor').value = s.bodyTextColor;
+            document.getElementById('accentColor').value = s.accentColor;
             document.getElementById('logoText').value = s.logoText;
             document.getElementById('headerBg').value = s.headerBg;
             document.getElementById('headerTextColor').value = s.headerTextColor;
             document.getElementById('menuItems').value = s.menuItems;
+            document.getElementById('stickyHeader').value = s.stickyHeader;
             document.getElementById('heroTitle').value = s.heroTitle;
             document.getElementById('heroSubtitle').value = s.heroSubtitle;
+            document.getElementById('heroBgImage').value = s.heroBgImage || '';
+            document.getElementById('heroHeight').value = s.heroHeight;
+            document.getElementById('heroHeightValue').textContent = s.heroHeight + 'px';
             document.getElementById('heroBtnText').value = s.heroBtnText;
-            document.getElementById('heroBtnColor').value = s.heroBtnColor;
+            document.getElementById('heroBtnLink').value = s.heroBtnLink;
+            document.getElementById('heroBtnBg').value = s.heroBtnBg;
+            document.getElementById('heroBtnTextColor').value = s.heroBtnTextColor;
+            document.getElementById('heroBtnRadius').value = s.heroBtnRadius;
+            document.getElementById('heroBtnFontSize').value = s.heroBtnFontSize;
+            document.getElementById('showCardButtons').value = s.showCardButtons;
+            document.getElementById('cardBtnText').value = s.cardBtnText;
+            document.getElementById('cardBtnBg').value = s.cardBtnBg;
+            document.getElementById('cardBtnTextColor').value = s.cardBtnTextColor;
+            document.getElementById('menuHoverColor').value = s.menuHoverColor;
+            document.getElementById('menuHoverUnderline').value = s.menuHoverUnderline;
             document.getElementById('cardsTitle').value = s.cardsTitle;
             document.getElementById('card1Title').value = s.card1Title;
             document.getElementById('card1Desc').value = s.card1Desc;
+            document.getElementById('card1Icon').value = s.card1Icon;
             document.getElementById('card2Title').value = s.card2Title;
             document.getElementById('card2Desc').value = s.card2Desc;
+            document.getElementById('card2Icon').value = s.card2Icon;
             document.getElementById('card3Title').value = s.card3Title;
             document.getElementById('card3Desc').value = s.card3Desc;
+            document.getElementById('card3Icon').value = s.card3Icon;
             document.getElementById('cardBg').value = s.cardBg;
+            document.getElementById('cardsPerRow').value = s.cardsPerRow;
+            document.getElementById('sectionPortfolioTitle').value = s.sectionPortfolioTitle;
+            document.getElementById('sectionPortfolioText').value = s.sectionPortfolioText;
+            document.getElementById('sectionContactsTitle').value = s.sectionContactsTitle;
+            document.getElementById('sectionContactsText').value = s.sectionContactsText;
             document.getElementById('footerText').value = s.footerText;
             document.getElementById('footerBg').value = s.footerBg;
             document.getElementById('footerTextColor').value = s.footerTextColor;
@@ -829,6 +1017,7 @@
             document.getElementById('bodyFont').value = s.bodyFont;
             document.getElementById('borderRadius').value = s.borderRadius;
             document.getElementById('headingScale').value = s.headingScale;
+            document.getElementById('cardShadow').value = s.cardShadow;
             document.getElementById('radiusValue').textContent = s.borderRadius + 'px';
             document.getElementById('scaleValue').textContent = s.headingScale + '%';
         }
@@ -847,21 +1036,20 @@
             document.getElementById('headingScale').addEventListener('input', function() {
                 document.getElementById('scaleValue').textContent = this.value + '%';
             });
+            document.getElementById('heroHeight').addEventListener('input', function() {
+                document.getElementById('heroHeightValue').textContent = this.value + 'px';
+            });
             document.getElementById('bgType').addEventListener('change', updateBgVisibility);
         }
 
         function setupNavListeners() {
             const navItems = document.querySelectorAll('.nav-item');
             const panels = document.querySelectorAll('.settings-panel');
-
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const panelId = this.dataset.panel;
-                    // Скрыть все панели
                     panels.forEach(p => p.classList.remove('visible'));
-                    // Показать нужную
                     document.getElementById(panelId).classList.add('visible');
-                    // Активный класс
                     navItems.forEach(n => n.classList.remove('active'));
                     this.classList.add('active');
                 });
@@ -883,22 +1071,45 @@
             settings.bgColor2 = document.getElementById('bgColor2').value;
             settings.gradientDir = document.getElementById('gradientDir').value;
             settings.bgImageUrl = document.getElementById('bgImageUrl').value;
+            settings.bodyTextColor = document.getElementById('bodyTextColor').value;
+            settings.accentColor = document.getElementById('accentColor').value;
             settings.logoText = document.getElementById('logoText').value;
             settings.headerBg = document.getElementById('headerBg').value;
             settings.headerTextColor = document.getElementById('headerTextColor').value;
             settings.menuItems = document.getElementById('menuItems').value;
+            settings.stickyHeader = document.getElementById('stickyHeader').value;
             settings.heroTitle = document.getElementById('heroTitle').value;
             settings.heroSubtitle = document.getElementById('heroSubtitle').value;
+            settings.heroBgImage = document.getElementById('heroBgImage').value;
+            settings.heroHeight = parseInt(document.getElementById('heroHeight').value);
             settings.heroBtnText = document.getElementById('heroBtnText').value;
-            settings.heroBtnColor = document.getElementById('heroBtnColor').value;
+            settings.heroBtnLink = document.getElementById('heroBtnLink').value;
+            settings.heroBtnBg = document.getElementById('heroBtnBg').value;
+            settings.heroBtnTextColor = document.getElementById('heroBtnTextColor').value;
+            settings.heroBtnRadius = parseInt(document.getElementById('heroBtnRadius').value);
+            settings.heroBtnFontSize = parseFloat(document.getElementById('heroBtnFontSize').value);
+            settings.showCardButtons = document.getElementById('showCardButtons').value;
+            settings.cardBtnText = document.getElementById('cardBtnText').value;
+            settings.cardBtnBg = document.getElementById('cardBtnBg').value;
+            settings.cardBtnTextColor = document.getElementById('cardBtnTextColor').value;
+            settings.menuHoverColor = document.getElementById('menuHoverColor').value;
+            settings.menuHoverUnderline = document.getElementById('menuHoverUnderline').value;
             settings.cardsTitle = document.getElementById('cardsTitle').value;
             settings.card1Title = document.getElementById('card1Title').value;
             settings.card1Desc = document.getElementById('card1Desc').value;
+            settings.card1Icon = document.getElementById('card1Icon').value;
             settings.card2Title = document.getElementById('card2Title').value;
             settings.card2Desc = document.getElementById('card2Desc').value;
+            settings.card2Icon = document.getElementById('card2Icon').value;
             settings.card3Title = document.getElementById('card3Title').value;
             settings.card3Desc = document.getElementById('card3Desc').value;
+            settings.card3Icon = document.getElementById('card3Icon').value;
             settings.cardBg = document.getElementById('cardBg').value;
+            settings.cardsPerRow = document.getElementById('cardsPerRow').value;
+            settings.sectionPortfolioTitle = document.getElementById('sectionPortfolioTitle').value;
+            settings.sectionPortfolioText = document.getElementById('sectionPortfolioText').value;
+            settings.sectionContactsTitle = document.getElementById('sectionContactsTitle').value;
+            settings.sectionContactsText = document.getElementById('sectionContactsText').value;
             settings.footerText = document.getElementById('footerText').value;
             settings.footerBg = document.getElementById('footerBg').value;
             settings.footerTextColor = document.getElementById('footerTextColor').value;
@@ -907,6 +1118,7 @@
             settings.bodyFont = document.getElementById('bodyFont').value;
             settings.borderRadius = parseInt(document.getElementById('borderRadius').value);
             settings.headingScale = parseInt(document.getElementById('headingScale').value);
+            settings.cardShadow = document.getElementById('cardShadow').value;
             saveSettings();
         }
 
@@ -928,7 +1140,7 @@
 
         function dismissGuide() {
             document.getElementById('guideBanner').classList.add('guide-hidden');
-            localStorage.setItem('siteforge_guide_dismissed', 'true');
+            localStorage.setItem('siteforge_guide_dismissed_v2', 'true');
         }
 
         function showToast(message) {
@@ -939,13 +1151,12 @@
             setTimeout(() => toast.remove(), 2400);
         }
 
-        // ===== ГЕНЕРАЦИЯ HTML САЙТА С РАБОЧИМИ ЯКОРЯМИ =====
+        // ===== ГЕНЕРАЦИЯ HTML САЙТА =====
         function generateSiteHTML() {
             const s = settings;
             const menuItems = s.menuItems.split(',').map(i => i.trim()).filter(i => i);
-            const socials = s.footerSocials.split(',').map(i => i.trim()).filter(i => i);
+            const socialsRaw = s.footerSocials.split(',').map(i => i.trim()).filter(i => i);
 
-            // Создаём ID для якорей из названий пунктов меню (транслит + убираем пробелы)
             function slugify(text) {
                 const map = {
                     'а': 'a',
@@ -989,50 +1200,45 @@
 
             const menuWithIds = menuItems.map((item, index) => {
                 let id;
-                if (index === 0) {
-                    id = 'home'; // Первый пункт — всегда Главная → якорь #home
-                } else {
-                    id = slugify(item);
-                }
+                if (index === 0) id = 'home';
+                else id = slugify(item);
                 return { name: item, id: id };
             });
 
-            // Генерируем дополнительные секции для пунктов меню
-            function generateMenuSections() {
-                let sections = '';
-                menuWithIds.forEach((item, index) => {
-                    if (index === 0) {
-                        // Главная — это hero, не дублируем
-                        sections += `<!-- Секция "${item.name}" — это Hero-блок выше -->\n`;
-                    } else if (item.id === 'uslugi' || item.id === 'services') {
-                        // Услуги — это карточки, не дублируем
-                        sections += `<!-- Секция "${item.name}" — это блок с карточками ниже -->\n`;
-                    } else {
-                        // Создаём дополнительную секцию-заглушку
-                        const icons = ['📄', '📁', '💼', '📞', '✉️', '🏢', '👥', '⭐'];
-                        const icon = icons[index % icons.length];
-                        sections += `
-        <section class="extra-section" id="${item.id}">
+            const servicesItem = menuWithIds.find(item =>
+                item.name.toLowerCase().includes('услуг') || item.name.toLowerCase().includes('services')
+            );
+            const servicesId = servicesItem ? servicesItem.id : 'uslugi';
+            const heroLink = s.heroBtnLink || servicesId;
+
+            function makeExtraSection(name, id, title, text) {
+                if (!title) title = name;
+                if (!text) text = 'Содержимое этого раздела можно изменить в конструкторе.';
+                return `
+        <section class="extra-section" id="${id}">
             <div class="container">
-                <span class="extra-icon">${icon}</span>
-                <h2>${item.name}</h2>
-                <p>Это секция «${item.name}». Здесь вы можете разместить информацию о вашей компании, проектах или контактные данные. Текст можно изменить в конструкторе.</p>
+                <h2>${title}</h2>
+                <p>${text}</p>
             </div>
         </section>`;
-                    }
+            }
+
+            function generateExtraSections() {
+                let html = '';
+                const sectionMap = {
+                    'portfolio': { title: s.sectionPortfolioTitle, text: s.sectionPortfolioText },
+                    'kontakty': { title: s.sectionContactsTitle, text: s.sectionContactsText },
+                    'contacts': { title: s.sectionContactsTitle, text: s.sectionContactsText },
+                };
+                menuWithIds.forEach(item => {
+                    if (item.id === 'home') return;
+                    if (item.id === servicesId) return;
+                    const preset = sectionMap[item.id] || { title: item.name, text: 'Содержимое этого раздела можно изменить в конструкторе.' };
+                    html += makeExtraSection(item.name, item.id, preset.title, preset.text);
                 });
-                return sections;
+                return html;
             }
-
-            const extraSections = generateMenuSections();
-
-            // Определяем ID для секции услуг (должен совпадать с тем, что в меню)
-            let servicesId = 'uslugi';
-            const servicesItem = menuWithIds.find(item => item.name.toLowerCase().includes('услуг') || item.name
-                .toLowerCase().includes('services'));
-            if (servicesItem) {
-                servicesId = servicesItem.id;
-            }
+            const extraSections = generateExtraSections();
 
             let bgCSS = '';
             if (s.bgType === 'color') bgCSS = `background-color: ${s.bgColor};`;
@@ -1044,9 +1250,43 @@
 
             const br = s.borderRadius;
             const hs = s.headingScale / 100;
+            const stickyCSS = s.stickyHeader === 'yes' ? 'position:sticky;top:0;' : 'position:relative;';
+            const heroBgCSS = s.heroBgImage ?
+                `background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${s.heroBgImage}') center/cover; color:#fff;` :
+                '';
+            const heroTextColor = s.heroBgImage ? '#fff' : s.bodyTextColor;
+            const heroSubtitleColor = s.heroBgImage ? 'rgba(255,255,255,0.85)' : '#555';
+            const menuHoverUnderlineCSS = s.menuHoverUnderline === 'yes' ? 'text-decoration:underline;' :
+                'text-decoration:none;';
+            const cardShadowCSS = {
+                'soft': '0 4px 24px rgba(0,0,0,0.06)',
+                'medium': '0 8px 30px rgba(0,0,0,0.12)',
+                'hard': '0 12px 40px rgba(0,0,0,0.2)',
+                'none': 'none'
+            } [s.cardShadow] || '0 4px 24px rgba(0,0,0,0.06)';
+            const cardHoverShadowCSS = {
+                'soft': '0 16px 40px rgba(0,0,0,0.12)',
+                'medium': '0 20px 50px rgba(0,0,0,0.2)',
+                'hard': '0 24px 60px rgba(0,0,0,0.3)',
+                'none': 'none'
+            } [s.cardShadow] || '0 16px 40px rgba(0,0,0,0.12)';
+            const cardsPerRowCSS = {
+                '2': 'repeat(auto-fit, minmax(350px, 1fr))',
+                '3': 'repeat(auto-fit, minmax(280px, 1fr))',
+                '4': 'repeat(auto-fit, minmax(220px, 1fr))'
+            } [s.cardsPerRow] || 'repeat(auto-fit, minmax(280px, 1fr))';
 
             const menuHTML = menuWithIds.map(m => `<a href="#${m.id}">${m.name}</a>`).join('\n                ');
-            const socialsHTML = socials.map(soc => `<a href="#">${soc}</a>`).join('  ·  ');
+
+            const socialsHTML = socialsRaw.map(soc => {
+                const parts = soc.split(':');
+                const name = parts[0].trim();
+                const url = parts[1] ? parts[1].trim() : '#';
+                return `<a href="${url}" target="_blank" rel="noopener">${name}</a>`;
+            }).join('  ·  ');
+
+            const cardBtnsHTML = s.showCardButtons === 'yes' ? `
+        <a href="#${servicesId}" class="card-btn">${s.cardBtnText}</a>` : '';
 
             return `<!DOCTYPE html>
         <html lang="ru">
@@ -1061,23 +1301,22 @@
         body{
             font-family:${s.bodyFont};
             ${bgCSS}
-            color:#1a1a2e;
+            color:${s.bodyTextColor};
             line-height:1.7;
             min-height:100vh;
         }
+        a{color:${s.accentColor};transition:all 0.2s}
         h1,h2,h3{font-family:${s.headingFont};font-weight:700;line-height:1.2}
         h1{font-size:${3.4*hs}rem}
         h2{font-size:${2.4*hs}rem}
         h3{font-size:${1.4*hs}rem}
         .container{max-width:1200px;margin:0 auto;padding:0 24px}
 
-        /* Шапка */
         .header{
             background:${s.headerBg};
             color:${s.headerTextColor};
             padding:14px 0;
-            position:sticky;
-            top:0;
+            ${stickyCSS}
             z-index:100;
             backdrop-filter:blur(10px);
         }
@@ -1085,33 +1324,41 @@
         .logo{font-size:1.5rem;font-weight:800;font-family:${s.headingFont};letter-spacing:-0.5px}
         .logo a{color:${s.headerTextColor};text-decoration:none}
         .header nav{display:flex;gap:24px;flex-wrap:wrap}
-        .header nav a{color:${s.headerTextColor};text-decoration:none;font-weight:500;font-size:0.9rem;opacity:0.85;transition:opacity 0.2s}
-        .header nav a:hover{opacity:1}
+        .header nav a{color:${s.headerTextColor};text-decoration:none;font-weight:500;font-size:0.9rem;opacity:0.85;transition:all 0.2s}
+        .header nav a:hover{opacity:1;color:${s.menuHoverColor};${menuHoverUnderlineCSS}}
 
-        /* Hero */
-        .hero{text-align:center;padding:100px 24px 70px;max-width:750px;margin:0 auto}
-        .hero h1{margin-bottom:18px}
-        .hero p{font-size:1.15rem;color:#555;margin-bottom:32px}
+        .hero{
+            text-align:center;
+            padding:60px 24px;
+            max-width:750px;
+            margin:0 auto;
+            min-height:${s.heroHeight}px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            ${heroBgCSS}
+        }
+        .hero h1{margin-bottom:18px;color:${heroTextColor}}
+        .hero p{font-size:1.15rem;color:${heroSubtitleColor};margin-bottom:32px}
         .btn-hero{
             display:inline-block;
             padding:15px 42px;
-            background:${s.heroBtnColor};
-            color:#fff;
-            border-radius:${br}px;
+            background:${s.heroBtnBg};
+            color:${s.heroBtnTextColor};
+            border-radius:${s.heroBtnRadius}px;
             text-decoration:none;
             font-weight:600;
-            font-size:1rem;
+            font-size:${s.heroBtnFontSize}rem;
             transition:transform 0.3s,box-shadow 0.3s;
             box-shadow:0 10px 30px rgba(0,0,0,0.15);
         }
         .btn-hero:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.25)}
 
-        /* Карточки */
         .cards-section{padding:60px 24px;text-align:center}
         .cards-section h2{margin-bottom:40px}
         .cards-grid{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            grid-template-columns:${cardsPerRowCSS};
             gap:24px;
             max-width:1100px;
             margin:0 auto;
@@ -1120,30 +1367,35 @@
             background:${s.cardBg};
             padding:36px 28px;
             border-radius:${br}px;
-            box-shadow:0 4px 24px rgba(0,0,0,0.06);
+            box-shadow:${cardShadowCSS};
             transition:transform 0.3s,box-shadow 0.3s;
-        }
-        .card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
-        .card .icon{font-size:2.5rem;margin-bottom:14px;display:block}
-        .card h3{margin-bottom:10px}
-        .card p{color:#666;font-size:0.9rem}
-
-        /* Дополнительные секции */
-        .extra-section{
-            padding:80px 24px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
             text-align:center;
-            max-width:800px;
-            margin:0 auto;
         }
-        .extra-section .extra-icon{
-            font-size:3rem;
-            display:block;
-            margin-bottom:16px;
+        .card:hover{transform:translateY(-6px);box-shadow:${cardHoverShadowCSS}}
+        .card .icon{font-size:2.5rem;margin-bottom:14px;display:block}
+        .card h3{margin-bottom:10px;color:${s.bodyTextColor}}
+        .card p{color:#666;font-size:0.9rem;margin-bottom:16px;flex:1}
+        .card-btn{
+            display:inline-block;
+            padding:10px 24px;
+            background:${s.cardBtnBg};
+            color:${s.cardBtnTextColor};
+            border-radius:${br}px;
+            text-decoration:none;
+            font-weight:600;
+            font-size:0.85rem;
+            transition:transform 0.3s,box-shadow 0.3s;
+            margin-top:auto;
         }
-        .extra-section h2{margin-bottom:16px}
-        .extra-section p{color:#555;font-size:1.05rem}
+        .card-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
 
-        /* Подвал */
+        .extra-section{padding:80px 24px;text-align:center;max-width:800px;margin:0 auto}
+        .extra-section h2{margin-bottom:16px}
+        .extra-section p{color:#555;font-size:1.05rem;line-height:1.8}
+
         .footer{
             background:${s.footerBg};
             color:${s.footerTextColor};
@@ -1153,14 +1405,15 @@
         }
         .footer .socials{margin-top:10px;font-size:0.85rem}
         .footer .socials a{color:${s.footerTextColor};text-decoration:none}
-        .footer .socials a:hover{text-decoration:underline}
+        .footer .socials a:hover{text-decoration:underline;color:#fff}
         .footer .copyright-note{font-size:0.7rem;margin-top:8px;opacity:0.5}
 
         @media(max-width:768px){
             h1{font-size:${2.2*hs}rem}
             h2{font-size:${1.6*hs}rem}
-            .hero{padding:50px 20px 40px}
+            .hero{padding:40px 20px;min-height:auto}
             .header .container{flex-direction:column}
+            .cards-grid{grid-template-columns:1fr}
         }
         </style>
         </head>
@@ -1175,7 +1428,7 @@
         <section class="hero" id="home">
             <h1>${s.heroTitle}</h1>
             <p>${s.heroSubtitle}</p>
-            <a href="#${servicesId}" class="btn-hero">${s.heroBtnText}</a>
+            <a href="#${heroLink}" class="btn-hero">${s.heroBtnText}</a>
         </section>
 
         ${extraSections}
@@ -1184,19 +1437,22 @@
             <h2>${s.cardsTitle}</h2>
             <div class="cards-grid">
                 <div class="card">
-                    <span class="icon">🎨</span>
+                    <span class="icon">${s.card1Icon}</span>
                     <h3>${s.card1Title}</h3>
                     <p>${s.card1Desc}</p>
+                    ${cardBtnsHTML}
                 </div>
                 <div class="card">
-                    <span class="icon">⚡</span>
+                    <span class="icon">${s.card2Icon}</span>
                     <h3>${s.card2Title}</h3>
                     <p>${s.card2Desc}</p>
+                    ${cardBtnsHTML}
                 </div>
                 <div class="card">
-                    <span class="icon">💬</span>
+                    <span class="icon">${s.card3Icon}</span>
                     <h3>${s.card3Title}</h3>
                     <p>${s.card3Desc}</p>
+                    ${cardBtnsHTML}
                 </div>
             </div>
         </section>
@@ -1232,11 +1488,10 @@
             a.download = 'мой-сайт.html';
             a.click();
             URL.revokeObjectURL(url);
-            showToast('💾 Сайт скачан! Все ссылки рабочие.');
+            showToast('💾 Сайт скачан! Все кнопки и ссылки рабочие.');
         }
 
-        // ===== ЗАПУСК =====
         init();
     </script>
-</body>
-</html>
+
+</body></html>
