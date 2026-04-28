@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteForge — визуальный конструктор сайтов</title>
+    <style>
+        :root {
+            --bg: #09090b;
+            --surface: #18181b;
+            --surface2: #27272a;
+            --border: #3f3f46;
+            --accent: #a78bfa;
+            --accent-glow: rgba(167, 139, 250, 0.3);
+            --text: #fafafa;
+            --text2: #a1a1aa;
+            --danger: #f87171;
+            --success: #4ade80;
+            --radius: 14px;
+            --radius-sm: 10px;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font);
+            background: #000;
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== ЛЕВАЯ ПАНЕЛЬ ========== */
+        .sidebar {
+            width: 380px;
+            min-width: 380px;
+            height: 100vh;
+            background: var(--bg);
+            border-right: 1px solid #27272a;
+            display: flex;
+            flex-direction: column;
+            z-index: 20;
+            box-shadow: 8px 0 40px rgba(0, 0, 0, 0.6);
+        }
+        .sidebar-header {
+            padding: 24px 24px 20px;
+            border-bottom: 1px solid #27272a;
+            background: linear-gradient(180deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
+        }
+        .sidebar-header .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sidebar-header .brand .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 8px 25px rgba(167, 139, 250, 0.35);
+        }
+        .sidebar-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            line-height: 1.1;
+        }
+        .sidebar-header h1 span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text2);
+            display: block;
+            letter-spacing: 0.5px;
+        }
+        .sidebar-header .copyright {
+            font-size: 0.65rem;
+            color: #52525b;
+            margin-top: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-nav::-webkit-scrollbar {
+            width: 3px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 3px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 16px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.88rem;
+            color: var(--text2);
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            position: relative;
+        }
+        .nav-item:hover {
+            background: var(--surface);
+            color: var(--text);
+            border-color: #27272a;
+        }
+        .nav-item.active {
+            background: var(--surface2);
+            color: #fff;
+            border-color: #52525b;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.08);
+        }
+        .nav-item .icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        .nav-item .badge {
+            margin-left: auto;
+            font-size: 0.65rem;
+            background: #27272a;
+            padding: 3px 8px;
+            border-radius: 20px;
+            color: var(--text2);
+        }
+        .nav-item.active .badge {
+            background: #3f3f46;
+            color: #fff;
+        }
+
+        /* Панель настроек */
+        .settings-panel {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 18px;
+            animation: fadeSlideIn 0.25s ease;
+        }
+        .settings-panel.visible {
+            display: flex;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .setting-group {
+            background: var(--surface);
+            border: 1px solid #27272a;
+            border-radius: var(--radius);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .setting-group h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #71717a;
+            font-weight: 600;
+        }
+        .setting-row {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .setting-row label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #a1a1aa;
+        }
+        .setting-row input[type="text"],
+        .setting-row textarea,
+        .setting-row select {
+            width: 100%;
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #fafafa;
+            font-family: var(--font);
+            font-size: 0.85rem;
+            resize: vertical;
+            transition: all 0.2s;
+        }
+        .setting-row input[type="text"]:focus,
+        .setting-row textarea:focus,
+        .setting-row select:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+        }
+        .setting-row textarea {
+            min-height: 55px;
+        }
+        .setting-row input[type="color"] {
+            width: 100%;
+            height: 38px;
+            border: 2px solid #3f3f46;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #18181b;
+            padding: 3px;
+        }
+        .setting-row input[type="color"]:hover {
+            border-color: #a78bfa;
+        }
+        .setting-row input[type="range"] {
+            width: 100%;
+            accent-color: #a78bfa;
+        }
+        .color-presets {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .color-preset {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .color-preset:hover {
+            border-color: #fff;
+            transform: scale(1.15);
+        }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #27272a;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #09090b;
+        }
+        .btn {
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            font-family: var(--font);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.2px;
+        }
+        .btn-primary {
+            background: #a78bfa;
+            color: #09090b;
+            box-shadow: 0 4px 20px rgba(167, 139, 250, 0.3);
+        }
+        .btn-primary:hover {
+            background: #c4b5fd;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(167, 139, 250, 0.45);
+        }
+        .btn-download {
+            background: #4ade80;
+            color: #09090b;
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+        }
+        .btn-download:hover {
+            background: #6ee7b7;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.45);
+        }
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid #3f3f46;
+            color: #a1a1aa;
+        }
+        .btn-ghost:hover {
+            background: #27272a;
+            color: #fff;
+            border-color: #52525b;
+        }
+
+        /* ========== ПРАВАЯ ОБЛАСТЬ ========== */
+        .preview-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #18181b;
+        }
+        .preview-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #09090b;
+            border-bottom: 1px solid #27272a;
+            gap: 16px;
+        }
+        .device-switcher {
+            display: flex;
+            gap: 4px;
+            background: #18181b;
+            border-radius: 20px;
+            padding: 3px;
+        }
+        .device-btn {
+            padding: 7px 16px;
+            border-radius: 18px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 500;
+            background: transparent;
+            color: #71717a;
+            font-family: var(--font);
+            transition: all 0.2s;
+        }
+        .device-btn.active {
+            background: #27272a;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        .preview-url {
+            font-size: 0.75rem;
+            color: #52525b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .preview-url .dot {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .preview-stage {
+            flex: 1;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 24px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.04) 0%, transparent 50%),
+                repeating-conic-gradient(#1c1c1f 0% 25%, #18181b 0% 50%) 50% / 16px 16px;
+        }
+        .preview-stage iframe {
+            border: none;
+            background: #fff;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            min-height: 700px;
+            height: auto;
+        }
+        .preview-stage iframe.desktop {
+            max-width: 1100px;
+        }
+        .preview-stage iframe.tablet {
+            max-width: 768px;
+        }
+        .preview-stage iframe.mobile {
+            max-width: 390px;
+            border-radius: 20px;
+        }
+
+        /* Гайд-баннер */
+        .guide-banner {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            max-width: 300px;
+            z-index: 50;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            animation: floatUp 0.5s ease;
+        }
+        @keyframes floatUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .guide-banner h4 {
+            color: #a78bfa;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .guide-banner p {
+            font-size: 0.75rem;
+            color: #a1a1aa;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .guide-banner .steps {
+            font-size: 0.7rem;
+            color: #71717a;
+            line-height: 1.8;
+        }
+        .guide-banner .steps span {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+        .guide-banner button {
+            margin-top: 10px;
+            width: 100%;
+            font-size: 0.78rem;
+        }
+        .guide-hidden {
+            display: none !important;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4ade80;
+            color: #09090b;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.4);
+            animation: toastIn 0.4s ease, toastOut 0.4s ease 2s forwards;
+            pointer-events: none;
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== САЙДБАР ====== -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <div class="logo-icon">✨</div>
+                <h1>SiteForge<span>Визуальный конструктор</span></h1>
+            </div>
+            <div class="copyright">© CayPlay 2026. Все права защищены.</div>
+        </div>
+
+        <div class="sidebar-nav" id="sidebarNav">
+            <div class="nav-item active" data-panel="panel-bg">
+                <span class="icon">🎨</span> Фон<span class="badge">цвет</span>
+            </div>
+            <div class="nav-item" data-panel="panel-header">
+                <span class="icon">📋</span> Шапка<span class="badge">меню</span>
+            </div>
+            <div class="nav-item" data-panel="panel-hero">
+                <span class="icon">🚀</span> Главный блок<span class="badge">hero</span>
+            </div>
+            <div class="nav-item" data-panel="panel-cards">
+                <span class="icon">🃏</span> Карточки<span class="badge">услуги</span>
+            </div>
+            <div class="nav-item" data-panel="panel-footer">
+                <span class="icon">📌</span> Подвал<span class="badge">footer</span>
+            </div>
+            <div class="nav-item" data-panel="panel-typography">
+                <span class="icon">🔤</span> Типографика<span class="badge">шрифты</span>
+            </div>
+        </div>
+
+        <!-- Панели настроек -->
+        <div class="settings-panel visible" id="panel-bg">
+            <div class="setting-group">
+                <h3>🎨 Фон сайта</h3>
+                <div class="setting-row">
+                    <label>Тип фона</label>
+                    <select id="bgType">
+                        <option value="gradient">Градиент</option>
+                        <option value="color">Сплошной цвет</option>
+                        <option value="image">Изображение (URL)</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <label>Основной цвет</label>
+                    <input type="color" id="bgColor" value="#f0f4ff">
+                </div>
+                <div class="setting-row" id="gradientRow">
+                    <label>Второй цвет градиента</label>
+                    <input type="color" id="bgColor2" value="#e8ecf8">
+                </div>
+                <div class="setting-row" id="gradientDirRow">
+                    <label>Направление</label>
+                    <select id="gradientDir">
+                        <option value="to bottom right">↘ По диагонали</option>
+                        <option value="to bottom">↓ Сверху вниз</option>
+                        <option value="to right">→ Слева направо</option>
+                        <option value="to top">↑ Снизу вверх</option>
+                    </select>
+                </div>
+                <div class="setting-row" id="imageUrlRow" style="display:none;">
+                    <label>URL изображения</label>
+                    <input type="text" id="bgImageUrl" placeholder="https://images.unsplash.com/...">
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="panel-header">
+            <div class="setting-group">
+                <h3>📋 Шапка сайта</h3>
+                <div class="setting-row">
+                    <label>Логотип (текст)</label>
+                    <input type="text" id="logoText" value="SiteForge">
+                </div>
+                <div class="setting-row">
+                    <label>Цвет фона шапки</label>
+                    <input type="color" id="headerBg" value="#1e1e2e">
+                </div>
+                <div class="setting-row">
+                    <label>Цвет текста</label>
+                    <input type="color" id="headerTextColor" value="#ffffff">
+                </div>
+                <div class="setting-row">
+                    <label>Пункты меню (через запятую)</label>
+                    <input type="text" id="menuItems" value="Главная, О нас, Портфолио, Контакты">
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="panel-hero">
+            <div class="setting-group">
+                <h3>🚀 Главный блок (Hero)</h3>
+                <div class="setting-row">
+                    <label>Заголовок</label>
+                    <input type="text" id="heroTitle" value="Создайте сайт своей мечты">
+                </div>
+                <div class="setting-row">
+                    <label>Подзаголовок</label>
+                    <textarea id="heroSubtitle">Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.</textarea>
+                </div>
+                <div class="setting-row">
+                    <label>Текст кнопки</label>
+                    <input type="text" id="heroBtnText" value="Попробовать">
+                </div>
+                <div class="setting-row">
+                    <label>Цвет кнопки</label>
+                    <input type="color" id="heroBtnColor" value="#7c3aed">
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="panel-cards">
+            <div class="setting-group">
+                <h3>🃏 Карточки услуг</h3>
+                <div class="setting-row">
+                    <label>Заголовок секции</label>
+                    <input type="text" id="cardsTitle" value="Наши услуги">
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 1 — Название</label>
+                    <input type="text" id="card1Title" value="Дизайн">
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 1 — Описание</label>
+                    <textarea id="card1Desc">Уникальный современный дизайн, выделяющий вас среди конкурентов.</textarea>
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 2 — Название</label>
+                    <input type="text" id="card2Title" value="Разработка">
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 2 — Описание</label>
+                    <textarea id="card2Desc">Быстрая и надёжная разработка на современных технологиях.</textarea>
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 3 — Название</label>
+                    <input type="text" id="card3Title" value="Поддержка">
+                </div>
+                <div class="setting-row">
+                    <label>Карточка 3 — Описание</label>
+                    <textarea id="card3Desc">Круглосуточная поддержка и сопровождение вашего проекта.</textarea>
+                </div>
+                <div class="setting-row">
+                    <label>Цвет фона карточек</label>
+                    <input type="color" id="cardBg" value="#ffffff">
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="panel-footer">
+            <div class="setting-group">
+                <h3>📌 Подвал сайта</h3>
+                <div class="setting-row">
+                    <label>Текст копирайта</label>
+                    <input type="text" id="footerText" value="© 2026 SiteForge. Все права защищены.">
+                </div>
+                <div class="setting-row">
+                    <label>Цвет фона</label>
+                    <input type="color" id="footerBg" value="#1e1e2e">
+                </div>
+                <div class="setting-row">
+                    <label>Цвет текста</label>
+                    <input type="color" id="footerTextColor" value="#a0a0b8">
+                </div>
+                <div class="setting-row">
+                    <label>Соцсети (через запятую)</label>
+                    <input type="text" id="footerSocials" value="VK, Telegram, GitHub">
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="panel-typography">
+            <div class="setting-group">
+                <h3>🔤 Типографика</h3>
+                <div class="setting-row">
+                    <label>Шрифт заголовков</label>
+                    <select id="headingFont">
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Montserrat', sans-serif">Montserrat</option>
+                        <option value="'Playfair Display', serif">Playfair Display</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <label>Шрифт текста</label>
+                    <select id="bodyFont">
+                        <option value="'Inter', sans-serif">Inter</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="'Open Sans', sans-serif">Open Sans</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <label>Скругление элементов: <span id="radiusValue">12px</span></label>
+                    <input type="range" id="borderRadius" min="0" max="30" value="12">
+                </div>
+                <div class="setting-row">
+                    <label>Масштаб заголовков: <span id="scaleValue">100%</span></label>
+                    <input type="range" id="headingScale" min="80" max="150" value="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <button class="btn btn-primary" onclick="applyChanges()">✨ Применить изменения</button>
+            <button class="btn btn-download" onclick="downloadSite()">💾 Скачать HTML-файл</button>
+            <button class="btn btn-ghost" onclick="resetSettings()">↺ Сбросить к шаблону</button>
+        </div>
+    </div>
+
+    <!-- ====== ПРЕДПРОСМОТР ====== -->
+    <div class="preview-wrapper">
+        <div class="preview-toolbar">
+            <div class="device-switcher">
+                <button class="device-btn active" onclick="switchDevice('desktop', this)">💻 Десктоп</button>
+                <button class="device-btn" onclick="switchDevice('tablet', this)">📱 Планшет</button>
+                <button class="device-btn" onclick="switchDevice('mobile', this)">📱 Телефон</button>
+            </div>
+            <div class="preview-url">
+                <span class="dot"></span> Предпросмотр в реальном времени
+            </div>
+        </div>
+        <div class="preview-stage">
+            <iframe id="previewFrame" class="desktop" title="Предпросмотр сайта" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div>
+
+    <!-- Гайд -->
+    <div class="guide-banner" id="guideBanner">
+        <h4>👋 Добро пожаловать в SiteForge!</h4>
+        <p>Создайте свой сайт без единой строки кода.</p>
+        <div class="steps">
+            <span>1.</span> Выберите раздел слева<br>
+            <span>2.</span> Настройте параметры<br>
+            <span>3.</span> Нажмите «Применить»<br>
+            <span>4.</span> Скачайте готовый сайт!<br>
+            <span>💡</span> В шаблоне меню и кнопки рабочие!
+        </div>
+        <button class="btn btn-primary" onclick="dismissGuide()" style="margin-top:12px;width:100%;">Понятно, приступим!</button>
+    </div>
+
+    <script>
+        // ===== СОСТОЯНИЕ ПО УМОЛЧАНИЮ =====
+        const defaultSettings = {
+            bgType: 'gradient',
+            bgColor: '#f0f4ff',
+            bgColor2: '#e8ecf8',
+            gradientDir: 'to bottom right',
+            bgImageUrl: '',
+            logoText: 'SiteForge',
+            headerBg: '#1e1e2e',
+            headerTextColor: '#ffffff',
+            menuItems: 'Главная, Услуги, Портфолио, Контакты',
+            heroTitle: 'Создайте сайт своей мечты',
+            heroSubtitle: 'Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.',
+            heroBtnText: 'Смотреть услуги',
+            heroBtnColor: '#7c3aed',
+            cardsTitle: 'Наши услуги',
+            card1Title: 'Дизайн',
+            card1Desc: 'Уникальный современный дизайн, выделяющий вас среди конкурентов.',
+            card2Title: 'Разработка',
+            card2Desc: 'Быстрая и надёжная разработка на современных технологиях.',
+            card3Title: 'Поддержка',
+            card3Desc: 'Круглосуточная поддержка и сопровождение вашего проекта.',
+            cardBg: '#ffffff',
+            footerText: '© 2026 SiteForge. Все права защищены.',
+            footerBg: '#1e1e2e',
+            footerTextColor: '#a0a0b8',
+            footerSocials: 'VK, Telegram, GitHub',
+            headingFont: "'Inter', sans-serif",
+            bodyFont: "'Inter', sans-serif",
+            borderRadius: 12,
+            headingScale: 100
+        };
+
+        let settings = loadSettings();
+
+        function loadSettings() {
+            const saved = localStorage.getItem('siteforge_settings');
+            return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultSettings));
+        }
+
+        function saveSettings() {
+            localStorage.setItem('siteforge_settings', JSON.stringify(settings));
+        }
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        function init() {
+            populateForm();
+            updatePreview();
+            setupNavListeners();
+            setupAutoSave();
+            setupRangeLabels();
+            updateBgVisibility();
+            // Гайд показываем 1 раз
+            if (localStorage.getItem('siteforge_guide_dismissed')) {
+                document.getElementById('guideBanner').classList.add('guide-hidden');
+            }
+        }
+
+        function populateForm() {
+            const s = settings;
+            document.getElementById('bgType').value = s.bgType;
+            document.getElementById('bgColor').value = s.bgColor;
+            document.getElementById('bgColor2').value = s.bgColor2;
+            document.getElementById('gradientDir').value = s.gradientDir;
+            document.getElementById('bgImageUrl').value = s.bgImageUrl || '';
+            document.getElementById('logoText').value = s.logoText;
+            document.getElementById('headerBg').value = s.headerBg;
+            document.getElementById('headerTextColor').value = s.headerTextColor;
+            document.getElementById('menuItems').value = s.menuItems;
+            document.getElementById('heroTitle').value = s.heroTitle;
+            document.getElementById('heroSubtitle').value = s.heroSubtitle;
+            document.getElementById('heroBtnText').value = s.heroBtnText;
+            document.getElementById('heroBtnColor').value = s.heroBtnColor;
+            document.getElementById('cardsTitle').value = s.cardsTitle;
+            document.getElementById('card1Title').value = s.card1Title;
+            document.getElementById('card1Desc').value = s.card1Desc;
+            document.getElementById('card2Title').value = s.card2Title;
+            document.getElementById('card2Desc').value = s.card2Desc;
+            document.getElementById('card3Title').value = s.card3Title;
+            document.getElementById('card3Desc').value = s.card3Desc;
+            document.getElementById('cardBg').value = s.cardBg;
+            document.getElementById('footerText').value = s.footerText;
+            document.getElementById('footerBg').value = s.footerBg;
+            document.getElementById('footerTextColor').value = s.footerTextColor;
+            document.getElementById('footerSocials').value = s.footerSocials;
+            document.getElementById('headingFont').value = s.headingFont;
+            document.getElementById('bodyFont').value = s.bodyFont;
+            document.getElementById('borderRadius').value = s.borderRadius;
+            document.getElementById('headingScale').value = s.headingScale;
+            document.getElementById('radiusValue').textContent = s.borderRadius + 'px';
+            document.getElementById('scaleValue').textContent = s.headingScale + '%';
+        }
+
+        function updateBgVisibility() {
+            const type = document.getElementById('bgType').value;
+            document.getElementById('gradientRow').style.display = type === 'gradient' ? 'flex' : 'none';
+            document.getElementById('gradientDirRow').style.display = type === 'gradient' ? 'flex' : 'none';
+            document.getElementById('imageUrlRow').style.display = type === 'image' ? 'flex' : 'none';
+        }
+
+        function setupRangeLabels() {
+            document.getElementById('borderRadius').addEventListener('input', function() {
+                document.getElementById('radiusValue').textContent = this.value + 'px';
+            });
+            document.getElementById('headingScale').addEventListener('input', function() {
+                document.getElementById('scaleValue').textContent = this.value + '%';
+            });
+            document.getElementById('bgType').addEventListener('change', updateBgVisibility);
+        }
+
+        function setupNavListeners() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const panels = document.querySelectorAll('.settings-panel');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const panelId = this.dataset.panel;
+                    // Скрыть все панели
+                    panels.forEach(p => p.classList.remove('visible'));
+                    // Показать нужную
+                    document.getElementById(panelId).classList.add('visible');
+                    // Активный класс
+                    navItems.forEach(n => n.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        function setupAutoSave() {
+            const allInputs = document.querySelectorAll(
+                '.settings-panel input, .settings-panel select, .settings-panel textarea');
+            allInputs.forEach(input => {
+                input.addEventListener('change', collectSettings);
+                input.addEventListener('input', collectSettings);
+            });
+        }
+
+        function collectSettings() {
+            settings.bgType = document.getElementById('bgType').value;
+            settings.bgColor = document.getElementById('bgColor').value;
+            settings.bgColor2 = document.getElementById('bgColor2').value;
+            settings.gradientDir = document.getElementById('gradientDir').value;
+            settings.bgImageUrl = document.getElementById('bgImageUrl').value;
+            settings.logoText = document.getElementById('logoText').value;
+            settings.headerBg = document.getElementById('headerBg').value;
+            settings.headerTextColor = document.getElementById('headerTextColor').value;
+            settings.menuItems = document.getElementById('menuItems').value;
+            settings.heroTitle = document.getElementById('heroTitle').value;
+            settings.heroSubtitle = document.getElementById('heroSubtitle').value;
+            settings.heroBtnText = document.getElementById('heroBtnText').value;
+            settings.heroBtnColor = document.getElementById('heroBtnColor').value;
+            settings.cardsTitle = document.getElementById('cardsTitle').value;
+            settings.card1Title = document.getElementById('card1Title').value;
+            settings.card1Desc = document.getElementById('card1Desc').value;
+            settings.card2Title = document.getElementById('card2Title').value;
+            settings.card2Desc = document.getElementById('card2Desc').value;
+            settings.card3Title = document.getElementById('card3Title').value;
+            settings.card3Desc = document.getElementById('card3Desc').value;
+            settings.cardBg = document.getElementById('cardBg').value;
+            settings.footerText = document.getElementById('footerText').value;
+            settings.footerBg = document.getElementById('footerBg').value;
+            settings.footerTextColor = document.getElementById('footerTextColor').value;
+            settings.footerSocials = document.getElementById('footerSocials').value;
+            settings.headingFont = document.getElementById('headingFont').value;
+            settings.bodyFont = document.getElementById('bodyFont').value;
+            settings.borderRadius = parseInt(document.getElementById('borderRadius').value);
+            settings.headingScale = parseInt(document.getElementById('headingScale').value);
+            saveSettings();
+        }
+
+        function applyChanges() {
+            collectSettings();
+            updatePreview();
+            showToast('✅ Изменения применены!');
+        }
+
+        function resetSettings() {
+            if (confirm('Сбросить все настройки к исходному шаблону?')) {
+                settings = JSON.parse(JSON.stringify(defaultSettings));
+                populateForm();
+                collectSettings();
+                updatePreview();
+                showToast('↺ Настройки сброшены');
+            }
+        }
+
+        function dismissGuide() {
+            document.getElementById('guideBanner').classList.add('guide-hidden');
+            localStorage.setItem('siteforge_guide_dismissed', 'true');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2400);
+        }
+
+        // ===== ГЕНЕРАЦИЯ HTML САЙТА С РАБОЧИМИ ЯКОРЯМИ =====
+        function generateSiteHTML() {
+            const s = settings;
+            const menuItems = s.menuItems.split(',').map(i => i.trim()).filter(i => i);
+            const socials = s.footerSocials.split(',').map(i => i.trim()).filter(i => i);
+
+            // Создаём ID для якорей из названий пунктов меню (транслит + убираем пробелы)
+            function slugify(text) {
+                const map = {
+                    'а': 'a',
+                    'б': 'b',
+                    'в': 'v',
+                    'г': 'g',
+                    'д': 'd',
+                    'е': 'e',
+                    'ё': 'e',
+                    'ж': 'zh',
+                    'з': 'z',
+                    'и': 'i',
+                    'й': 'y',
+                    'к': 'k',
+                    'л': 'l',
+                    'м': 'm',
+                    'н': 'n',
+                    'о': 'o',
+                    'п': 'p',
+                    'р': 'r',
+                    'с': 's',
+                    'т': 't',
+                    'у': 'u',
+                    'ф': 'f',
+                    'х': 'h',
+                    'ц': 'ts',
+                    'ч': 'ch',
+                    'ш': 'sh',
+                    'щ': 'sch',
+                    'ъ': '',
+                    'ы': 'y',
+                    'ь': '',
+                    'э': 'e',
+                    'ю': 'yu',
+                    'я': 'ya'
+                };
+                return text.toLowerCase().split('').map(c => map[c] || c).join('')
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '');
+            }
+
+            const menuWithIds = menuItems.map((item, index) => {
+                let id;
+                if (index === 0) {
+                    id = 'home'; // Первый пункт — всегда Главная → якорь #home
+                } else {
+                    id = slugify(item);
+                }
+                return { name: item, id: id };
+            });
+
+            // Генерируем дополнительные секции для пунктов меню
+            function generateMenuSections() {
+                let sections = '';
+                menuWithIds.forEach((item, index) => {
+                    if (index === 0) {
+                        // Главная — это hero, не дублируем
+                        sections += `<!-- Секция "${item.name}" — это Hero-блок выше -->\n`;
+                    } else if (item.id === 'uslugi' || item.id === 'services') {
+                        // Услуги — это карточки, не дублируем
+                        sections += `<!-- Секция "${item.name}" — это блок с карточками ниже -->\n`;
+                    } else {
+                        // Создаём дополнительную секцию-заглушку
+                        const icons = ['📄', '📁', '💼', '📞', '✉️', '🏢', '👥', '⭐'];
+                        const icon = icons[index % icons.length];
+                        sections += `
+        <section class="extra-section" id="${item.id}">
+            <div class="container">
+                <span class="extra-icon">${icon}</span>
+                <h2>${item.name}</h2>
+                <p>Это секция «${item.name}». Здесь вы можете разместить информацию о вашей компании, проектах или контактные данные. Текст можно изменить в конструкторе.</p>
+            </div>
+        </section>`;
+                    }
+                });
+                return sections;
+            }
+
+            const extraSections = generateMenuSections();
+
+            // Определяем ID для секции услуг (должен совпадать с тем, что в меню)
+            let servicesId = 'uslugi';
+            const servicesItem = menuWithIds.find(item => item.name.toLowerCase().includes('услуг') || item.name
+                .toLowerCase().includes('services'));
+            if (servicesItem) {
+                servicesId = servicesItem.id;
+            }
+
+            let bgCSS = '';
+            if (s.bgType === 'color') bgCSS = `background-color: ${s.bgColor};`;
+            else if (s.bgType === 'gradient') bgCSS =
+                `background: linear-gradient(${s.gradientDir}, ${s.bgColor}, ${s.bgColor2});`;
+            else if (s.bgType === 'image' && s.bgImageUrl) bgCSS =
+                `background: url('${s.bgImageUrl}') center/cover no-repeat fixed;`;
+            else bgCSS = `background-color: ${s.bgColor};`;
+
+            const br = s.borderRadius;
+            const hs = s.headingScale / 100;
+
+            const menuHTML = menuWithIds.map(m => `<a href="#${m.id}">${m.name}</a>`).join('\n                ');
+            const socialsHTML = socials.map(soc => `<a href="#">${soc}</a>`).join('  ·  ');
+
+            return `<!DOCTYPE html>
+        <html lang="ru">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${s.logoText}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:${s.bodyFont};
+            ${bgCSS}
+            color:#1a1a2e;
+            line-height:1.7;
+            min-height:100vh;
+        }
+        h1,h2,h3{font-family:${s.headingFont};font-weight:700;line-height:1.2}
+        h1{font-size:${3.4*hs}rem}
+        h2{font-size:${2.4*hs}rem}
+        h3{font-size:${1.4*hs}rem}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+        /* Шапка */
+        .header{
+            background:${s.headerBg};
+            color:${s.headerTextColor};
+            padding:14px 0;
+            position:sticky;
+            top:0;
+            z-index:100;
+            backdrop-filter:blur(10px);
+        }
+        .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+        .logo{font-size:1.5rem;font-weight:800;font-family:${s.headingFont};letter-spacing:-0.5px}
+        .logo a{color:${s.headerTextColor};text-decoration:none}
+        .header nav{display:flex;gap:24px;flex-wrap:wrap}
+        .header nav a{color:${s.headerTextColor};text-decoration:none;font-weight:500;font-size:0.9rem;opacity:0.85;transition:opacity 0.2s}
+        .header nav a:hover{opacity:1}
+
+        /* Hero */
+        .hero{text-align:center;padding:100px 24px 70px;max-width:750px;margin:0 auto}
+        .hero h1{margin-bottom:18px}
+        .hero p{font-size:1.15rem;color:#555;margin-bottom:32px}
+        .btn-hero{
+            display:inline-block;
+            padding:15px 42px;
+            background:${s.heroBtnColor};
+            color:#fff;
+            border-radius:${br}px;
+            text-decoration:none;
+            font-weight:600;
+            font-size:1rem;
+            transition:transform 0.3s,box-shadow 0.3s;
+            box-shadow:0 10px 30px rgba(0,0,0,0.15);
+        }
+        .btn-hero:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.25)}
+
+        /* Карточки */
+        .cards-section{padding:60px 24px;text-align:center}
+        .cards-section h2{margin-bottom:40px}
+        .cards-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:24px;
+            max-width:1100px;
+            margin:0 auto;
+        }
+        .card{
+            background:${s.cardBg};
+            padding:36px 28px;
+            border-radius:${br}px;
+            box-shadow:0 4px 24px rgba(0,0,0,0.06);
+            transition:transform 0.3s,box-shadow 0.3s;
+        }
+        .card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+        .card .icon{font-size:2.5rem;margin-bottom:14px;display:block}
+        .card h3{margin-bottom:10px}
+        .card p{color:#666;font-size:0.9rem}
+
+        /* Дополнительные секции */
+        .extra-section{
+            padding:80px 24px;
+            text-align:center;
+            max-width:800px;
+            margin:0 auto;
+        }
+        .extra-section .extra-icon{
+            font-size:3rem;
+            display:block;
+            margin-bottom:16px;
+        }
+        .extra-section h2{margin-bottom:16px}
+        .extra-section p{color:#555;font-size:1.05rem}
+
+        /* Подвал */
+        .footer{
+            background:${s.footerBg};
+            color:${s.footerTextColor};
+            text-align:center;
+            padding:32px 24px;
+            margin-top:40px;
+        }
+        .footer .socials{margin-top:10px;font-size:0.85rem}
+        .footer .socials a{color:${s.footerTextColor};text-decoration:none}
+        .footer .socials a:hover{text-decoration:underline}
+        .footer .copyright-note{font-size:0.7rem;margin-top:8px;opacity:0.5}
+
+        @media(max-width:768px){
+            h1{font-size:${2.2*hs}rem}
+            h2{font-size:${1.6*hs}rem}
+            .hero{padding:50px 20px 40px}
+            .header .container{flex-direction:column}
+        }
+        </style>
+        </head>
+        <body>
+        <header class="header">
+            <div class="container">
+                <div class="logo"><a href="#home">${s.logoText}</a></div>
+                <nav>${menuHTML}</nav>
+            </div>
+        </header>
+
+        <section class="hero" id="home">
+            <h1>${s.heroTitle}</h1>
+            <p>${s.heroSubtitle}</p>
+            <a href="#${servicesId}" class="btn-hero">${s.heroBtnText}</a>
+        </section>
+
+        ${extraSections}
+
+        <section class="cards-section" id="${servicesId}">
+            <h2>${s.cardsTitle}</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="icon">🎨</span>
+                    <h3>${s.card1Title}</h3>
+                    <p>${s.card1Desc}</p>
+                </div>
+                <div class="card">
+                    <span class="icon">⚡</span>
+                    <h3>${s.card2Title}</h3>
+                    <p>${s.card2Desc}</p>
+                </div>
+                <div class="card">
+                    <span class="icon">💬</span>
+                    <h3>${s.card3Title}</h3>
+                    <p>${s.card3Desc}</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>${s.footerText}</p>
+            <div class="socials">${socialsHTML}</div>
+            <p class="copyright-note">Создано в SiteForge © CayPlay 2026</p>
+        </footer>
+        </body>
+        </html>`;
+        }
+
+        function updatePreview() {
+            const iframe = document.getElementById('previewFrame');
+            iframe.srcdoc = generateSiteHTML();
+        }
+
+        function switchDevice(device, btn) {
+            const iframe = document.getElementById('previewFrame');
+            iframe.className = device;
+            document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function downloadSite() {
+            collectSettings();
+            const html = generateSiteHTML();
+            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'мой-сайт.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('💾 Сайт скачан! Все ссылки рабочие.');
+        }
+
+        // ===== ЗАПУСК =====
+        init();
+    </script>
+</body>
+</html>
