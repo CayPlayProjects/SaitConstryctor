@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0027)file:///D:/constructor.html -->
-<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiteForge — визуальный конструктор сайтов</title>
     <style>
@@ -20,7 +20,6 @@
             --radius-sm: 10px;
             --font: 'Inter', system-ui, -apple-system, sans-serif;
         }
-
         * {
             margin: 0;
             padding: 0;
@@ -35,11 +34,9 @@
             overflow: hidden;
             -webkit-font-smoothing: antialiased;
         }
-
-        /* ========== ЛЕВАЯ ПАНЕЛЬ ========== */
         .sidebar {
-            width: 400px;
-            min-width: 400px;
+            width: 420px;
+            min-width: 420px;
             height: 100vh;
             background: var(--bg);
             border-right: 1px solid #27272a;
@@ -49,53 +46,52 @@
             box-shadow: 8px 0 40px rgba(0, 0, 0, 0.6);
         }
         .sidebar-header {
-            padding: 24px 24px 20px;
+            padding: 20px 22px 16px;
             border-bottom: 1px solid #27272a;
             background: linear-gradient(180deg, rgba(167, 139, 250, 0.08) 0%, transparent 100%);
         }
         .sidebar-header .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .sidebar-header .brand .logo-icon {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(135deg, #a78bfa, #7c3aed);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: 0 8px 25px rgba(167, 139, 250, 0.35);
+            font-size: 1.2rem;
+            box-shadow: 0 6px 20px rgba(167, 139, 250, 0.35);
         }
         .sidebar-header h1 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            letter-spacing: -0.4px;
+            letter-spacing: -0.3px;
             line-height: 1.1;
         }
         .sidebar-header h1 span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 500;
             color: var(--text2);
             display: block;
             letter-spacing: 0.5px;
         }
         .sidebar-header .copyright {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #52525b;
-            margin-top: 6px;
+            margin-top: 4px;
             letter-spacing: 0.3px;
         }
-
         .sidebar-nav {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 16px;
+            padding: 8px 14px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
         .sidebar-nav::-webkit-scrollbar {
             width: 3px;
@@ -104,20 +100,18 @@
             background: #3f3f46;
             border-radius: 3px;
         }
-
         .nav-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 13px 16px;
+            gap: 8px;
+            padding: 11px 14px;
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-weight: 500;
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             color: var(--text2);
             transition: all 0.2s ease;
             border: 1px solid transparent;
-            position: relative;
         }
         .nav-item:hover {
             background: var(--surface);
@@ -131,15 +125,15 @@
             box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.08);
         }
         .nav-item .icon {
-            font-size: 1.2rem;
-            width: 24px;
+            font-size: 1.1rem;
+            width: 22px;
             text-align: center;
         }
         .nav-item .badge {
             margin-left: auto;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             background: #27272a;
-            padding: 3px 8px;
+            padding: 2px 7px;
             border-radius: 20px;
             color: var(--text2);
         }
@@ -147,15 +141,13 @@
             background: #3f3f46;
             color: #fff;
         }
-
-        /* Панель настроек */
         .settings-panel {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 16px;
             display: none;
             flex-direction: column;
-            gap: 18px;
+            gap: 14px;
             animation: fadeSlideIn 0.25s ease;
         }
         .settings-panel.visible {
@@ -171,30 +163,34 @@
                 transform: translateX(0);
             }
         }
-
         .setting-group {
             background: var(--surface);
             border: 1px solid #27272a;
             border-radius: var(--radius);
-            padding: 18px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
         .setting-group h3 {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #71717a;
             font-weight: 600;
         }
+        .setting-group .helper-text {
+            font-size: 0.68rem;
+            color: #52525b;
+            line-height: 1.4;
+        }
         .setting-row {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
         .setting-row label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: #a1a1aa;
         }
@@ -205,10 +201,10 @@
             background: #18181b;
             border: 1px solid #3f3f46;
             border-radius: 8px;
-            padding: 10px 14px;
+            padding: 9px 12px;
             color: #fafafa;
             font-family: var(--font);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             resize: vertical;
             transition: all 0.2s;
         }
@@ -220,16 +216,16 @@
             box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
         }
         .setting-row textarea {
-            min-height: 55px;
+            min-height: 50px;
         }
         .setting-row input[type="color"] {
             width: 100%;
-            height: 38px;
+            height: 34px;
             border: 2px solid #3f3f46;
             border-radius: 8px;
             cursor: pointer;
             background: #18181b;
-            padding: 3px;
+            padding: 2px;
         }
         .setting-row input[type="color"]:hover {
             border-color: #a78bfa;
@@ -240,36 +236,39 @@
         }
         .setting-row-inline {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         .setting-row-inline>div {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
-
+        .setting-row-inline>div label {
+            font-size: 0.7rem;
+            color: #71717a;
+        }
         .sidebar-footer {
-            padding: 16px 20px;
+            padding: 12px 16px;
             border-top: 1px solid #27272a;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             background: #09090b;
         }
         .btn {
-            padding: 12px 18px;
+            padding: 11px 16px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-family: var(--font);
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             letter-spacing: 0.2px;
         }
         .btn-primary {
@@ -280,7 +279,6 @@
         .btn-primary:hover {
             background: #c4b5fd;
             transform: translateY(-1px);
-            box-shadow: 0 8px 30px rgba(167, 139, 250, 0.45);
         }
         .btn-download {
             background: #4ade80;
@@ -290,7 +288,6 @@
         .btn-download:hover {
             background: #6ee7b7;
             transform: translateY(-1px);
-            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.45);
         }
         .btn-ghost {
             background: transparent;
@@ -300,10 +297,7 @@
         .btn-ghost:hover {
             background: #27272a;
             color: #fff;
-            border-color: #52525b;
         }
-
-        /* ========== ПРАВАЯ ОБЛАСТЬ ========== */
         .preview-wrapper {
             flex: 1;
             display: flex;
@@ -314,24 +308,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: #09090b;
             border-bottom: 1px solid #27272a;
-            gap: 16px;
         }
         .device-switcher {
             display: flex;
             gap: 4px;
             background: #18181b;
             border-radius: 20px;
-            padding: 3px;
+            padding: 2px;
         }
         .device-btn {
-            padding: 7px 16px;
+            padding: 6px 14px;
             border-radius: 18px;
             border: none;
             cursor: pointer;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             font-weight: 500;
             background: transparent;
             color: #71717a;
@@ -344,7 +337,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         .preview-url {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #52525b;
             display: flex;
             align-items: center;
@@ -366,17 +359,14 @@
                 opacity: 0.3;
             }
         }
-
         .preview-stage {
             flex: 1;
             overflow: auto;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 24px;
-            background:
-                radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.04) 0%, transparent 50%),
-                repeating-conic-gradient(#1c1c1f 0% 25%, #18181b 0% 50%) 50% / 16px 16px;
+            padding: 20px;
+            background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.04) 0%, transparent 50%), repeating-conic-gradient(#1c1c1f 0% 25%, #18181b 0% 50%) 50% / 16px 16px;
         }
         .preview-stage iframe {
             border: none;
@@ -398,17 +388,15 @@
             max-width: 390px;
             border-radius: 20px;
         }
-
-        /* Гайд-баннер */
         .guide-banner {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 20px;
+            right: 20px;
             background: #18181b;
             border: 1px solid #3f3f46;
             border-radius: var(--radius);
-            padding: 20px 22px;
-            max-width: 300px;
+            padding: 18px 20px;
+            max-width: 280px;
             z-index: 50;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             animation: floatUp 0.5s ease;
@@ -425,19 +413,13 @@
         }
         .guide-banner h4 {
             color: #a78bfa;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        .guide-banner p {
-            font-size: 0.75rem;
-            color: #a1a1aa;
-            line-height: 1.6;
-            margin-bottom: 12px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
         }
         .guide-banner .steps {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: #71717a;
-            line-height: 1.8;
+            line-height: 1.7;
         }
         .guide-banner .steps span {
             color: #a78bfa;
@@ -446,13 +428,11 @@
         .guide-banner button {
             margin-top: 10px;
             width: 100%;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
         }
         .guide-hidden {
             display: none !important;
         }
-
-        /* Toast */
         .toast {
             position: fixed;
             top: 20px;
@@ -492,7 +472,6 @@
 </head>
 <body>
 
-    <!-- ====== САЙДБАР ====== -->
     <div class="sidebar">
         <div class="sidebar-header">
             <div class="brand">
@@ -503,385 +482,77 @@
         </div>
 
         <div class="sidebar-nav" id="sidebarNav">
-            <div class="nav-item" data-panel="panel-bg">
-                <span class="icon">🎨</span> Фон и стили<span class="badge">основа</span>
-            </div>
-            <div class="nav-item" data-panel="panel-header">
-                <span class="icon">📋</span> Шапка и меню<span class="badge">header</span>
-            </div>
-            <div class="nav-item" data-panel="panel-hero">
-                <span class="icon">🚀</span> Главный блок<span class="badge">hero</span>
-            </div>
-            <div class="nav-item" data-panel="panel-buttons">
-                <span class="icon">🔘</span> Кнопки и ссылки<span class="badge">интерактив</span>
-            </div>
-            <div class="nav-item" data-panel="panel-cards">
-                <span class="icon">🃏</span> Карточки услуг<span class="badge">контент</span>
-            </div>
-            <div class="nav-item" data-panel="panel-sections">
-                <span class="icon">📑</span> Доп. секции<span class="badge">страницы</span>
-            </div>
-            <div class="nav-item active" data-panel="panel-footer">
-                <span class="icon">📌</span> Подвал сайта<span class="badge">footer</span>
-            </div>
-            <div class="nav-item" data-panel="panel-typography">
-                <span class="icon">🔤</span> Типографика<span class="badge">шрифты</span>
-            </div>
+            <div class="nav-item active" data-panel="panel-bg"><span class="icon">🎨</span> Фон и стили<span class="badge">основа</span></div>
+            <div class="nav-item" data-panel="panel-header"><span class="icon">📋</span> Шапка и меню<span class="badge">header</span></div>
+            <div class="nav-item" data-panel="panel-hero"><span class="icon">🚀</span> Главный блок<span class="badge">hero</span></div>
+            <div class="nav-item" data-panel="panel-hero-btn"><span class="icon">🔘</span> Кнопка Hero<span class="badge">главная</span></div>
+            <div class="nav-item" data-panel="panel-card-btns"><span class="icon">🃏</span> Кнопки карточек<span class="badge">интерактив</span></div>
+            <div class="nav-item" data-panel="panel-extra-btns"><span class="icon">➕</span> Доп. кнопки<span class="badge">кастом</span></div>
+            <div class="nav-item" data-panel="panel-socials"><span class="icon">🔗</span> Соцсети и ссылки<span class="badge">footer</span></div>
+            <div class="nav-item" data-panel="panel-sections"><span class="icon">📑</span> Контент секций<span class="badge">текст</span></div>
+            <div class="nav-item" data-panel="panel-typography"><span class="icon">🔤</span> Типографика<span class="badge">шрифты</span></div>
         </div>
 
-        <!-- Панели настроек -->
-        <div class="settings-panel" id="panel-bg">
-            <div class="setting-group">
-                <h3>🎨 Фон сайта</h3>
-                <div class="setting-row">
-                    <label>Тип фона</label>
-                    <select id="bgType">
-                        <option value="gradient">Градиент</option>
-                        <option value="color">Сплошной цвет</option>
-                        <option value="image">Изображение (URL)</option>
-                    </select>
-                </div>
-                <div class="setting-row">
-                    <label>Основной цвет</label>
-                    <input type="color" id="bgColor" value="#f0f4ff">
-                </div>
-                <div class="setting-row" id="gradientRow" style="display: flex;">
-                    <label>Второй цвет градиента</label>
-                    <input type="color" id="bgColor2" value="#e8ecf8">
-                </div>
-                <div class="setting-row" id="gradientDirRow" style="display: flex;">
-                    <label>Направление</label>
-                    <select id="gradientDir">
-                        <option value="to bottom right">↘ По диагонали</option>
-                        <option value="to bottom">↓ Сверху вниз</option>
-                        <option value="to right">→ Слева направо</option>
-                        <option value="to top">↑ Снизу вверх</option>
-                    </select>
-                </div>
-                <div class="setting-row" id="imageUrlRow" style="display:none;">
-                    <label>URL изображения</label>
-                    <input type="text" id="bgImageUrl" placeholder="https://images.unsplash.com/...">
-                </div>
-            </div>
-            <div class="setting-group">
-                <h3>🌐 Общие цвета</h3>
-                <div class="setting-row">
-                    <label>Цвет текста сайта</label>
-                    <input type="color" id="bodyTextColor" value="#1a1a2e">
-                </div>
-                <div class="setting-row">
-                    <label>Акцентный цвет (ссылки, кнопки)</label>
-                    <input type="color" id="accentColor" value="#7c3aed">
-                </div>
-            </div>
+        <div class="settings-panel visible" id="panel-bg">
+            <div class="setting-group"><h3>🎨 Фон сайта</h3><div class="setting-row"><label>Тип фона</label><select id="bgType"><option value="gradient">Градиент</option><option value="color">Сплошной цвет</option><option value="image">Изображение (URL)</option></select></div><div class="setting-row"><label>Основной цвет</label><input type="color" id="bgColor" value="#f0f4ff"></div><div class="setting-row" id="gradientRow"><label>Второй цвет</label><input type="color" id="bgColor2" value="#e8ecf8"></div><div class="setting-row" id="gradientDirRow"><label>Направление</label><select id="gradientDir"><option value="to bottom right">↘ Диагональ</option><option value="to bottom">↓ Вниз</option><option value="to right">→ Вправо</option><option value="to top">↑ Вверх</option></select></div><div class="setting-row" id="imageUrlRow" style="display:none;"><label>URL изображения</label><input type="text" id="bgImageUrl" placeholder="https://..."></div></div>
+            <div class="setting-group"><h3>🌐 Общие цвета</h3><div class="setting-row"><label>Цвет текста</label><input type="color" id="bodyTextColor" value="#1a1a2e"></div><div class="setting-row"><label>Акцентный цвет</label><input type="color" id="accentColor" value="#7c3aed"></div></div>
         </div>
-
         <div class="settings-panel" id="panel-header">
-            <div class="setting-group">
-                <h3>📋 Шапка сайта</h3>
-                <div class="setting-row">
-                    <label>Логотип (текст)</label>
-                    <input type="text" id="logoText" value="SiteForge">
-                </div>
-                <div class="setting-row">
-                    <label>Цвет фона шапки</label>
-                    <input type="color" id="headerBg" value="#1e1e2e">
-                </div>
-                <div class="setting-row">
-                    <label>Цвет текста шапки</label>
-                    <input type="color" id="headerTextColor" value="#ffffff">
-                </div>
-                <div class="setting-row">
-                    <label>Пункты меню (через запятую)</label>
-                    <input type="text" id="menuItems" value="Главная, Услуги, Портфолио, Контакты">
-                </div>
-                <div class="setting-row">
-                    <label>Закрепить шапку при скролле</label>
-                    <select id="stickyHeader">
-                        <option value="yes">Да</option>
-                        <option value="no">Нет</option>
-                    </select>
-                </div>
-            </div>
+            <div class="setting-group"><h3>📋 Шапка</h3><div class="setting-row"><label>Логотип</label><input type="text" id="logoText" value="SiteForge"></div><div class="setting-row"><label>Цвет фона</label><input type="color" id="headerBg" value="#1e1e2e"></div><div class="setting-row"><label>Цвет текста</label><input type="color" id="headerTextColor" value="#ffffff"></div><div class="setting-row"><label>Пункты меню (через запятую)</label><input type="text" id="menuItems" value="Главная, Услуги, Портфолио, Контакты"></div><div class="setting-row"><label>Закрепить шапку</label><select id="stickyHeader"><option value="yes">Да</option><option value="no">Нет</option></select></div><div class="setting-row"><label>Цвет при наведении</label><input type="color" id="menuHoverColor" value="#a78bfa"></div><div class="setting-row"><label>Подчёркивание</label><select id="menuHoverUnderline"><option value="yes">Да</option><option value="no">Нет</option></select></div></div>
         </div>
-
         <div class="settings-panel" id="panel-hero">
-            <div class="setting-group">
-                <h3>🚀 Главный блок (Hero)</h3>
-                <div class="setting-row">
-                    <label>Заголовок</label>
-                    <input type="text" id="heroTitle" value="Создайте сайт своей мечты">
-                </div>
-                <div class="setting-row">
-                    <label>Подзаголовок</label>
-                    <textarea id="heroSubtitle">Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.</textarea>
-                </div>
-                <div class="setting-row">
-                    <label>Фоновое изображение Hero (URL, необязательно)</label>
-                    <input type="text" id="heroBgImage" placeholder="https://images.unsplash.com/...">
-                </div>
-                <div class="setting-row">
-                    <label>Высота блока (px)</label>
-                    <input type="range" id="heroHeight" min="300" max="900" value="500">
-                    <span style="font-size:0.7rem;color:#71717a" id="heroHeightValue">500px</span>
-                </div>
-            </div>
+            <div class="setting-group"><h3>🚀 Главный блок</h3><div class="setting-row"><label>Заголовок</label><input type="text" id="heroTitle" value="Создайте сайт своей мечты"></div><div class="setting-row"><label>Подзаголовок</label><textarea id="heroSubtitle">Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.</textarea></div><div class="setting-row"><label>Фоновое изображение (URL)</label><input type="text" id="heroBgImage" placeholder="Необязательно"></div><div class="setting-row"><label>Высота блока: <span id="heroHeightValue">500px</span></label><input type="range" id="heroHeight" min="300" max="900" value="500"></div></div>
         </div>
-
-        <div class="settings-panel" id="panel-buttons">
-            <div class="setting-group">
-                <h3>🔘 Главная кнопка (Hero)</h3>
-                <div class="setting-row">
-                    <label>Текст кнопки</label>
-                    <input type="text" id="heroBtnText" value="Смотреть услуги">
-                </div>
-                <div class="setting-row">
-                    <label>Куда ведёт (якорь #)</label>
-                    <input type="text" id="heroBtnLink" value="uslugi">
-                </div>
-                <div class="setting-row-inline">
-                    <div>
-                        <label>Цвет фона</label>
-                        <input type="color" id="heroBtnBg" value="#7c3aed">
-                    </div>
-                    <div>
-                        <label>Цвет текста</label>
-                        <input type="color" id="heroBtnTextColor" value="#ffffff">
-                    </div>
-                </div>
-                <div class="setting-row-inline">
-                    <div>
-                        <label>Скругление (px)</label>
-                        <input type="range" id="heroBtnRadius" min="0" max="50" value="12">
-                    </div>
-                    <div>
-                        <label>Размер шрифта (rem)</label>
-                        <input type="range" id="heroBtnFontSize" min="0.8" max="1.5" step="0.05" value="1">
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <h3>🔘 Кнопки в карточках</h3>
-                <div class="setting-row">
-                    <label>Показывать кнопки в карточках</label>
-                    <select id="showCardButtons">
-                        <option value="yes">Да</option>
-                        <option value="no">Нет</option>
-                    </select>
-                </div>
-                <div class="setting-row">
-                    <label>Текст на кнопках</label>
-                    <input type="text" id="cardBtnText" value="Подробнее">
-                </div>
-                <div class="setting-row-inline">
-                    <div>
-                        <label>Цвет фона</label>
-                        <input type="color" id="cardBtnBg" value="#7c3aed">
-                    </div>
-                    <div>
-                        <label>Цвет текста</label>
-                        <input type="color" id="cardBtnTextColor" value="#ffffff">
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <h3>🔗 Ссылки в меню</h3>
-                <div class="setting-row">
-                    <label>Цвет ссылок при наведении</label>
-                    <input type="color" id="menuHoverColor" value="#a78bfa">
-                </div>
-                <div class="setting-row">
-                    <label>Подчёркивание при наведении</label>
-                    <select id="menuHoverUnderline">
-                        <option value="yes">Да</option>
-                        <option value="no">Нет</option>
-                    </select>
-                </div>
-            </div>
+        <div class="settings-panel" id="panel-hero-btn">
+            <div class="setting-group"><h3>🔘 Главная кнопка</h3><div class="setting-row"><label>Текст</label><input type="text" id="heroBtnText" value="Смотреть услуги"></div><div class="setting-row"><label>Куда ведёт (якорь #)</label><input type="text" id="heroBtnLink" value="uslugi"></div><div class="setting-row-inline"><div><label>Цвет фона</label><input type="color" id="heroBtnBg" value="#7c3aed"></div><div><label>Цвет текста</label><input type="color" id="heroBtnTextColor" value="#ffffff"></div></div><div class="setting-row-inline"><div><label>Скругление (px)</label><input type="range" id="heroBtnRadius" min="0" max="50" value="12"></div><div><label>Размер текста (rem)</label><input type="range" id="heroBtnFontSize" min="0.8" max="1.5" step="0.05" value="1"></div></div></div>
         </div>
-
-        <div class="settings-panel" id="panel-cards">
-            <div class="setting-group">
-                <h3>🃏 Карточки услуг</h3>
-                <div class="setting-row">
-                    <label>Заголовок секции</label>
-                    <input type="text" id="cardsTitle" value="Наши услуги">
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 1 — Название</label>
-                    <input type="text" id="card1Title" value="Дизайн">
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 1 — Описание</label>
-                    <textarea id="card1Desc">Уникальный современный дизайн, выделяющий вас среди конкурентов.</textarea>
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 1 — Иконка (эмодзи)</label>
-                    <input type="text" id="card1Icon" value="🎨">
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 2 — Название</label>
-                    <input type="text" id="card2Title" value="Разработка">
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 2 — Описание</label>
-                    <textarea id="card2Desc">Быстрая и надёжная разработка на современных технологиях.</textarea>
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 2 — Иконка (эмодзи)</label>
-                    <input type="text" id="card2Icon" value="⚡">
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 3 — Название</label>
-                    <input type="text" id="card3Title" value="Поддержка">
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 3 — Описание</label>
-                    <textarea id="card3Desc">Круглосуточная поддержка и сопровождение вашего проекта.</textarea>
-                </div>
-                <div class="setting-row">
-                    <label>Карточка 3 — Иконка (эмодзи)</label>
-                    <input type="text" id="card3Icon" value="💬">
-                </div>
-                <div class="setting-row">
-                    <label>Цвет фона карточек</label>
-                    <input type="color" id="cardBg" value="#ffffff">
-                </div>
-                <div class="setting-row">
-                    <label>Количество карточек в ряду</label>
-                    <select id="cardsPerRow">
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-            </div>
+        <div class="settings-panel" id="panel-card-btns">
+            <div class="setting-group"><h3>🃏 Кнопки в карточках</h3><div class="setting-row"><label>Показывать кнопки</label><select id="showCardButtons"><option value="yes">Да</option><option value="no">Нет</option></select></div><div class="setting-row"><label>Текст на кнопках</label><input type="text" id="cardBtnText" value="Подробнее"></div><div class="setting-row"><label>Куда ведут (якорь #)</label><input type="text" id="cardBtnLink" value="uslugi"></div><div class="setting-row-inline"><div><label>Цвет фона</label><input type="color" id="cardBtnBg" value="#7c3aed"></div><div><label>Цвет текста</label><input type="color" id="cardBtnTextColor" value="#ffffff"></div></div></div>
+            <div class="setting-group"><h3>🃏 Карточки (контент)</h3><div class="setting-row"><label>Заголовок секции</label><input type="text" id="cardsTitle" value="Наши услуги"></div><div class="setting-row"><label>Цвет фона</label><input type="color" id="cardBg" value="#ffffff"></div><div class="setting-row"><label>В ряду</label><select id="cardsPerRow"><option value="3">3</option><option value="2">2</option><option value="4">4</option></select></div><div class="setting-row"><label>Карточка 1: Название</label><input type="text" id="card1Title" value="Дизайн"></div><div class="setting-row"><label>Описание</label><textarea id="card1Desc">Уникальный современный дизайн.</textarea></div><div class="setting-row"><label>Иконка</label><input type="text" id="card1Icon" value="🎨"></div><div class="setting-row"><label>Карточка 2: Название</label><input type="text" id="card2Title" value="Разработка"></div><div class="setting-row"><label>Описание</label><textarea id="card2Desc">Быстрая и надёжная разработка.</textarea></div><div class="setting-row"><label>Иконка</label><input type="text" id="card2Icon" value="⚡"></div><div class="setting-row"><label>Карточка 3: Название</label><input type="text" id="card3Title" value="Поддержка"></div><div class="setting-row"><label>Описание</label><textarea id="card3Desc">Круглосуточная поддержка.</textarea></div><div class="setting-row"><label>Иконка</label><input type="text" id="card3Icon" value="💬"></div></div>
         </div>
-
+        <div class="settings-panel" id="panel-extra-btns">
+            <div class="setting-group"><h3>➕ Дополнительная кнопка 1</h3><p class="helper-text">Появится после Hero-блока.</p><div class="setting-row"><label>Показать</label><select id="extraBtn1Show"><option value="yes">Да</option><option value="no">Нет</option></select></div><div class="setting-row"><label>Текст</label><input type="text" id="extraBtn1Text" value="Связаться с нами"></div><div class="setting-row"><label>Куда ведёт (якорь # или URL)</label><input type="text" id="extraBtn1Link" value="kontakty"></div><div class="setting-row-inline"><div><label>Цвет фона</label><input type="color" id="extraBtn1Bg" value="#10b981"></div><div><label>Цвет текста</label><input type="color" id="extraBtn1TextColor" value="#ffffff"></div></div></div>
+            <div class="setting-group"><h3>➕ Дополнительная кнопка 2</h3><p class="helper-text">Появится перед подвалом.</p><div class="setting-row"><label>Показать</label><select id="extraBtn2Show"><option value="no">Нет</option><option value="yes">Да</option></select></div><div class="setting-row"><label>Текст</label><input type="text" id="extraBtn2Text" value="Написать в Telegram"></div><div class="setting-row"><label>Куда ведёт (URL)</label><input type="text" id="extraBtn2Link" value="https://t.me/username"></div><div class="setting-row-inline"><div><label>Цвет фона</label><input type="color" id="extraBtn2Bg" value="#0088cc"></div><div><label>Цвет текста</label><input type="color" id="extraBtn2TextColor" value="#ffffff"></div></div></div>
+        </div>
+        <div class="settings-panel" id="panel-socials">
+            <div class="setting-group"><h3>🔗 Соцсети в подвале</h3><p class="helper-text">Формат: Название:ссылка:иконка (эмодзи). Каждая с новой строки или через запятую. Можно писать ссылки с http:// или без.</p><div class="setting-row"><label>Список соцсетей</label><textarea id="footerSocials" rows="5">VK:vk.com:📘, Telegram:t.me:✈️, GitHub:github.com:💻, YouTube:youtube.com:▶️</textarea></div><div class="setting-row"><label>Стиль отображения</label><select id="socialsStyle"><option value="buttons">Кнопки</option><option value="text">Текст с иконками</option><option value="icons-only">Только иконки</option></select></div><div class="setting-row"><label>Размер</label><select id="socialsSize"><option value="normal">Обычный</option><option value="large">Крупный</option><option value="small">Маленький</option></select></div></div>
+            <div class="setting-group"><h3>📌 Подвал</h3><div class="setting-row"><label>Текст копирайта</label><input type="text" id="footerText" value="© 2026 SiteForge. Все права защищены."></div><div class="setting-row"><label>Цвет фона</label><input type="color" id="footerBg" value="#1e1e2e"></div><div class="setting-row"><label>Цвет текста</label><input type="color" id="footerTextColor" value="#a0a0b8"></div></div>
+        </div>
         <div class="settings-panel" id="panel-sections">
-            <div class="setting-group">
-                <h3>📑 Дополнительные секции</h3>
-                <p style="font-size:0.75rem;color:#71717a;">Настройте контент для дополнительных пунктов меню (Портфолио, Контакты и т.д.)</p>
-                <div class="setting-row">
-                    <label>Секция "Портфолио" — заголовок</label>
-                    <input type="text" id="sectionPortfolioTitle" value="Наши работы">
-                </div>
-                <div class="setting-row">
-                    <label>Секция "Портфолио" — текст</label>
-                    <textarea id="sectionPortfolioText">Здесь вы можете разместить примеры ваших работ. Галерея, кейсы, отзывы клиентов — всё, что угодно.</textarea>
-                </div>
-                <div class="setting-row">
-                    <label>Секция "Контакты" — заголовок</label>
-                    <input type="text" id="sectionContactsTitle" value="Свяжитесь с нами">
-                </div>
-                <div class="setting-row">
-                    <label>Секция "Контакты" — текст</label>
-                    <textarea id="sectionContactsText">Email: hello@siteforge.ru | Телефон: +7 (999) 123-45-67 | Адрес: г. Москва, ул. Примерная, 1</textarea>
-                </div>
-            </div>
+            <div class="setting-group"><h3>📑 Секция "Портфолио"</h3><div class="setting-row"><label>Заголовок</label><input type="text" id="sectionPortfolioTitle" value="Наши работы"></div><div class="setting-row"><label>Текст</label><textarea id="sectionPortfolioText">Здесь вы можете разместить примеры работ, галерею, кейсы.</textarea></div></div>
+            <div class="setting-group"><h3>📑 Секция "Контакты"</h3><div class="setting-row"><label>Заголовок</label><input type="text" id="sectionContactsTitle" value="Свяжитесь с нами"></div><div class="setting-row"><label>Текст</label><textarea id="sectionContactsText">Email: hello@siteforge.ru | Телефон: +7 (999) 123-45-67</textarea></div></div>
         </div>
-
-        <div class="settings-panel visible" id="panel-footer">
-            <div class="setting-group">
-                <h3>📌 Подвал сайта</h3>
-                <div class="setting-row">
-                    <label>Текст копирайта</label>
-                    <input type="text" id="footerText" value="© 2026 SiteForge. Все права защищены.">
-                </div>
-                <div class="setting-row">
-                    <label>Цвет фона</label>
-                    <input type="color" id="footerBg" value="#1e1e2e">
-                </div>
-                <div class="setting-row">
-                    <label>Цвет текста</label>
-                    <input type="color" id="footerTextColor" value="#a0a0b8">
-                </div>
-                <div class="setting-row">
-                    <label>Соцсети (название:ссылка, через запятую)</label>
-                    <input type="text" id="footerSocials" value="VK:https://vk.com, Telegram:https://t.me, GitHub:https://github.com">
-                </div>
-            </div>
-        </div>
-
         <div class="settings-panel" id="panel-typography">
-            <div class="setting-group">
-                <h3>🔤 Типографика</h3>
-                <div class="setting-row">
-                    <label>Шрифт заголовков</label>
-                    <select id="headingFont">
-                        <option value="&#39;Inter&#39;, sans-serif">Inter</option>
-                        <option value="&#39;Montserrat&#39;, sans-serif">Montserrat</option>
-                        <option value="&#39;Playfair Display&#39;, serif">Playfair Display</option>
-                        <option value="&#39;Roboto&#39;, sans-serif">Roboto</option>
-                    </select>
-                </div>
-                <div class="setting-row">
-                    <label>Шрифт текста</label>
-                    <select id="bodyFont">
-                        <option value="&#39;Inter&#39;, sans-serif">Inter</option>
-                        <option value="&#39;Roboto&#39;, sans-serif">Roboto</option>
-                        <option value="&#39;Open Sans&#39;, sans-serif">Open Sans</option>
-                    </select>
-                </div>
-                <div class="setting-row">
-                    <label>Общее скругление элементов: <span id="radiusValue">12px</span></label>
-                    <input type="range" id="borderRadius" min="0" max="30" value="12">
-                </div>
-                <div class="setting-row">
-                    <label>Масштаб заголовков: <span id="scaleValue">100%</span></label>
-                    <input type="range" id="headingScale" min="80" max="150" value="100">
-                </div>
-                <div class="setting-row">
-                    <label>Тень карточек</label>
-                    <select id="cardShadow">
-                        <option value="soft">Мягкая</option>
-                        <option value="medium">Средняя</option>
-                        <option value="hard">Сильная</option>
-                        <option value="none">Без тени</option>
-                    </select>
-                </div>
-            </div>
+            <div class="setting-group"><h3>🔤 Шрифты</h3><div class="setting-row"><label>Шрифт заголовков</label><select id="headingFont"><option value="'Inter', sans-serif">Inter</option><option value="'Montserrat', sans-serif">Montserrat</option><option value="'Playfair Display', serif">Playfair Display</option><option value="'Roboto', sans-serif">Roboto</option></select></div><div class="setting-row"><label>Шрифт текста</label><select id="bodyFont"><option value="'Inter', sans-serif">Inter</option><option value="'Roboto', sans-serif">Roboto</option><option value="'Open Sans', sans-serif">Open Sans</option></select></div><div class="setting-row"><label>Скругление: <span id="radiusValue">12px</span></label><input type="range" id="borderRadius" min="0" max="30" value="12"></div><div class="setting-row"><label>Масштаб заголовков: <span id="scaleValue">100%</span></label><input type="range" id="headingScale" min="80" max="150" value="100"></div><div class="setting-row"><label>Тень карточек</label><select id="cardShadow"><option value="soft">Мягкая</option><option value="medium">Средняя</option><option value="hard">Сильная</option><option value="none">Без тени</option></select></div></div>
         </div>
-
         <div class="sidebar-footer">
-            <button class="btn btn-primary" onclick="applyChanges()">✨ Применить изменения</button>
-            <button class="btn btn-download" onclick="downloadSite()">💾 Скачать HTML-файл</button>
-            <button class="btn btn-ghost" onclick="resetSettings()">↺ Сбросить к шаблону</button>
+            <button class="btn btn-primary" onclick="applyChanges()">✨ Применить</button>
+            <button class="btn btn-download" onclick="downloadSite()">💾 Скачать HTML</button>
+            <button class="btn btn-ghost" onclick="resetSettings()">↺ Сбросить</button>
         </div>
     </div>
 
-    <!-- ====== ПРЕДПРОСМОТР ====== -->
     <div class="preview-wrapper">
         <div class="preview-toolbar">
             <div class="device-switcher">
-                <button class="device-btn active" onclick="switchDevice(&#39;desktop&#39;, this)">💻 Десктоп</button>
-                <button class="device-btn" onclick="switchDevice(&#39;tablet&#39;, this)">📱 Планшет</button>
-                <button class="device-btn" onclick="switchDevice(&#39;mobile&#39;, this)">📱 Телефон</button>
+                <button class="device-btn active" onclick="switchDevice('desktop', this)">💻 Десктоп</button>
+                <button class="device-btn" onclick="switchDevice('tablet', this)">📱 Планшет</button>
+                <button class="device-btn" onclick="switchDevice('mobile', this)">📱 Телефон</button>
             </div>
-            <div class="preview-url">
-                <span class="dot"></span> Предпросмотр в реальном времени
-            </div>
+            <div class="preview-url"><span class="dot"></span> Предпросмотр</div>
         </div>
         <div class="preview-stage">
-            <iframe id="previewFrame" class="desktop" title="Предпросмотр сайта" sandbox="allow-same-origin allow-scripts" src="./constructor_files/saved_resource.html"></iframe>
+            <iframe id="previewFrame" class="desktop" title="Предпросмотр сайта" sandbox="allow-same-origin allow-scripts allow-top-navigation"></iframe>
         </div>
     </div>
 
-    <!-- Гайд -->
-    <div class="guide-banner guide-hidden" id="guideBanner">
-        <h4>👋 Добро пожаловать в SiteForge!</h4>
-        <p>Создайте сайт без кода. Все кнопки и ссылки настраиваются!</p>
-        <div class="steps">
-            <span>1.</span> Выберите раздел слева<br>
-            <span>2.</span> Настройте контент и цвета<br>
-            <span>3.</span> Нажмите «Применить»<br>
-            <span>4.</span> Скачайте готовый сайт!
-        </div>
-        <button class="btn btn-primary" onclick="dismissGuide()" style="margin-top:12px;width:100%;">Понятно, приступим!</button>
+    <div class="guide-banner" id="guideBanner">
+        <h4>👋 Добро пожаловать!</h4>
+        <div class="steps"><span>1.</span> Выберите раздел слева<br><span>2.</span> Настройте всё под себя<br><span>3.</span> Нажмите «Применить»<br><span>4.</span> Скачайте сайт!</div>
+        <button class="btn btn-primary" onclick="dismissGuide()" style="margin-top:10px;width:100%;">Понятно!</button>
     </div>
 
     <script>
-        // ===== СОСТОЯНИЕ ПО УМОЛЧАНИЮ =====
         const defaultSettings = {
             bgType: 'gradient',
             bgColor: '#f0f4ff',
@@ -895,8 +566,10 @@
             headerTextColor: '#ffffff',
             menuItems: 'Главная, Услуги, Портфолио, Контакты',
             stickyHeader: 'yes',
-            heroTitle: 'Создайте сайт своей мечты',
-            heroSubtitle: 'Простой и мощный конструктор. Меняйте всё в реальном времени — без навыков программирования.',
+            menuHoverColor: '#a78bfa',
+            menuHoverUnderline: 'yes',
+            heroTitle: 'Создайте свой простой сайт',
+            heroSubtitle: 'Простой и лёгкий конструктор. Меняйте всё в реальном времени — без навыков программирования.',
             heroBgImage: '',
             heroHeight: 500,
             heroBtnText: 'Смотреть услуги',
@@ -907,11 +580,22 @@
             heroBtnFontSize: 1,
             showCardButtons: 'yes',
             cardBtnText: 'Подробнее',
+            cardBtnLink: 'uslugi',
             cardBtnBg: '#7c3aed',
             cardBtnTextColor: '#ffffff',
-            menuHoverColor: '#a78bfa',
-            menuHoverUnderline: 'yes',
+            extraBtn1Show: 'yes',
+            extraBtn1Text: 'Связаться с нами',
+            extraBtn1Link: 'kontakty',
+            extraBtn1Bg: '#10b981',
+            extraBtn1TextColor: '#ffffff',
+            extraBtn2Show: 'no',
+            extraBtn2Text: 'Написать в Telegram',
+            extraBtn2Link: 'https://t.me/username',
+            extraBtn2Bg: '#0088cc',
+            extraBtn2TextColor: '#ffffff',
             cardsTitle: 'Наши услуги',
+            cardBg: '#ffffff',
+            cardsPerRow: '3',
             card1Title: 'Дизайн',
             card1Desc: 'Уникальный современный дизайн, выделяющий вас среди конкурентов.',
             card1Icon: '🎨',
@@ -921,16 +605,16 @@
             card3Title: 'Поддержка',
             card3Desc: 'Круглосуточная поддержка и сопровождение вашего проекта.',
             card3Icon: '💬',
-            cardBg: '#ffffff',
-            cardsPerRow: '3',
             sectionPortfolioTitle: 'Наши работы',
             sectionPortfolioText: 'Здесь вы можете разместить примеры ваших работ. Галерея, кейсы, отзывы клиентов — всё, что угодно.',
             sectionContactsTitle: 'Свяжитесь с нами',
-            sectionContactsText: 'Email: hello@siteforge.ru | Телефон: +7 (999) 123-45-67 | Адрес: г. Москва, ул. Примерная, 1',
+            sectionContactsText: 'Email: hello@siteforge.ru | Адрес: г. Екатеринбург, ул. Рандомная, 1',
             footerText: '© 2026 SiteForge. Все права защищены.',
             footerBg: '#1e1e2e',
             footerTextColor: '#a0a0b8',
-            footerSocials: 'VK:https://vk.com, Telegram:https://t.me, GitHub:https://github.com',
+            footerSocials: 'VK:vk.com:📘, Telegram:t.me:✈️, GitHub:github.com:💻, YouTube:youtube.com:▶️',
+            socialsStyle: 'buttons',
+            socialsSize: 'normal',
             headingFont: "'Inter', sans-serif",
             bodyFont: "'Inter', sans-serif",
             borderRadius: 12,
@@ -941,15 +625,12 @@
         let settings = loadSettings();
 
         function loadSettings() {
-            const saved = localStorage.getItem('siteforge_settings_v2');
+            const saved = localStorage.getItem('siteforge_v4');
             return saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultSettings));
         }
 
-        function saveSettings() {
-            localStorage.setItem('siteforge_settings_v2', JSON.stringify(settings));
-        }
+        function saveSettings() { localStorage.setItem('siteforge_v4', JSON.stringify(settings)); }
 
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
         function init() {
             populateForm();
             updatePreview();
@@ -957,67 +638,19 @@
             setupAutoSave();
             setupRangeLabels();
             updateBgVisibility();
-            if (localStorage.getItem('siteforge_guide_dismissed_v2')) {
-                document.getElementById('guideBanner').classList.add('guide-hidden');
-            }
+            if (localStorage.getItem('siteforge_guide_v4')) document.getElementById('guideBanner').classList.add('guide-hidden');
         }
 
         function populateForm() {
             const s = settings;
-            document.getElementById('bgType').value = s.bgType;
-            document.getElementById('bgColor').value = s.bgColor;
-            document.getElementById('bgColor2').value = s.bgColor2;
-            document.getElementById('gradientDir').value = s.gradientDir;
-            document.getElementById('bgImageUrl').value = s.bgImageUrl || '';
-            document.getElementById('bodyTextColor').value = s.bodyTextColor;
-            document.getElementById('accentColor').value = s.accentColor;
-            document.getElementById('logoText').value = s.logoText;
-            document.getElementById('headerBg').value = s.headerBg;
-            document.getElementById('headerTextColor').value = s.headerTextColor;
-            document.getElementById('menuItems').value = s.menuItems;
-            document.getElementById('stickyHeader').value = s.stickyHeader;
-            document.getElementById('heroTitle').value = s.heroTitle;
-            document.getElementById('heroSubtitle').value = s.heroSubtitle;
-            document.getElementById('heroBgImage').value = s.heroBgImage || '';
-            document.getElementById('heroHeight').value = s.heroHeight;
+            const ids = ['bgType', 'bgColor', 'bgColor2', 'gradientDir', 'bgImageUrl', 'bodyTextColor', 'accentColor', 'logoText', 'headerBg', 'headerTextColor', 'menuItems', 'stickyHeader', 'menuHoverColor', 'menuHoverUnderline', 'heroTitle', 'heroSubtitle', 'heroBgImage', 'heroHeight', 'heroBtnText', 'heroBtnLink', 'heroBtnBg', 'heroBtnTextColor', 'heroBtnRadius', 'heroBtnFontSize', 'showCardButtons', 'cardBtnText', 'cardBtnLink', 'cardBtnBg', 'cardBtnTextColor', 'extraBtn1Show', 'extraBtn1Text', 'extraBtn1Link', 'extraBtn1Bg', 'extraBtn1TextColor', 'extraBtn2Show', 'extraBtn2Text', 'extraBtn2Link', 'extraBtn2Bg', 'extraBtn2TextColor', 'cardsTitle', 'cardBg', 'cardsPerRow', 'card1Title', 'card1Desc', 'card1Icon', 'card2Title', 'card2Desc', 'card2Icon', 'card3Title', 'card3Desc', 'card3Icon', 'sectionPortfolioTitle', 'sectionPortfolioText', 'sectionContactsTitle', 'sectionContactsText', 'footerText', 'footerBg', 'footerTextColor', 'footerSocials', 'socialsStyle', 'socialsSize', 'headingFont', 'bodyFont', 'borderRadius', 'headingScale', 'cardShadow'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (el.type === 'color' || el.type === 'text' || el.type === 'textarea' || el.type === 'select-one') el.value = s[id] !== undefined ? s[id] : '';
+                if (el.type === 'range') el.value = s[id] !== undefined ? s[id] : 0;
+            });
             document.getElementById('heroHeightValue').textContent = s.heroHeight + 'px';
-            document.getElementById('heroBtnText').value = s.heroBtnText;
-            document.getElementById('heroBtnLink').value = s.heroBtnLink;
-            document.getElementById('heroBtnBg').value = s.heroBtnBg;
-            document.getElementById('heroBtnTextColor').value = s.heroBtnTextColor;
-            document.getElementById('heroBtnRadius').value = s.heroBtnRadius;
-            document.getElementById('heroBtnFontSize').value = s.heroBtnFontSize;
-            document.getElementById('showCardButtons').value = s.showCardButtons;
-            document.getElementById('cardBtnText').value = s.cardBtnText;
-            document.getElementById('cardBtnBg').value = s.cardBtnBg;
-            document.getElementById('cardBtnTextColor').value = s.cardBtnTextColor;
-            document.getElementById('menuHoverColor').value = s.menuHoverColor;
-            document.getElementById('menuHoverUnderline').value = s.menuHoverUnderline;
-            document.getElementById('cardsTitle').value = s.cardsTitle;
-            document.getElementById('card1Title').value = s.card1Title;
-            document.getElementById('card1Desc').value = s.card1Desc;
-            document.getElementById('card1Icon').value = s.card1Icon;
-            document.getElementById('card2Title').value = s.card2Title;
-            document.getElementById('card2Desc').value = s.card2Desc;
-            document.getElementById('card2Icon').value = s.card2Icon;
-            document.getElementById('card3Title').value = s.card3Title;
-            document.getElementById('card3Desc').value = s.card3Desc;
-            document.getElementById('card3Icon').value = s.card3Icon;
-            document.getElementById('cardBg').value = s.cardBg;
-            document.getElementById('cardsPerRow').value = s.cardsPerRow;
-            document.getElementById('sectionPortfolioTitle').value = s.sectionPortfolioTitle;
-            document.getElementById('sectionPortfolioText').value = s.sectionPortfolioText;
-            document.getElementById('sectionContactsTitle').value = s.sectionContactsTitle;
-            document.getElementById('sectionContactsText').value = s.sectionContactsText;
-            document.getElementById('footerText').value = s.footerText;
-            document.getElementById('footerBg').value = s.footerBg;
-            document.getElementById('footerTextColor').value = s.footerTextColor;
-            document.getElementById('footerSocials').value = s.footerSocials;
-            document.getElementById('headingFont').value = s.headingFont;
-            document.getElementById('bodyFont').value = s.bodyFont;
-            document.getElementById('borderRadius').value = s.borderRadius;
-            document.getElementById('headingScale').value = s.headingScale;
-            document.getElementById('cardShadow').value = s.cardShadow;
             document.getElementById('radiusValue').textContent = s.borderRadius + 'px';
             document.getElementById('scaleValue').textContent = s.headingScale + '%';
         }
@@ -1030,263 +663,145 @@
         }
 
         function setupRangeLabels() {
-            document.getElementById('borderRadius').addEventListener('input', function() {
-                document.getElementById('radiusValue').textContent = this.value + 'px';
-            });
-            document.getElementById('headingScale').addEventListener('input', function() {
-                document.getElementById('scaleValue').textContent = this.value + '%';
-            });
-            document.getElementById('heroHeight').addEventListener('input', function() {
-                document.getElementById('heroHeightValue').textContent = this.value + 'px';
+            ['borderRadius', 'headingScale', 'heroHeight'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('input', function() {
+                    if (id === 'borderRadius') document.getElementById('radiusValue').textContent = this.value + 'px';
+                    if (id === 'headingScale') document.getElementById('scaleValue').textContent = this.value + '%';
+                    if (id === 'heroHeight') document.getElementById('heroHeightValue').textContent = this.value + 'px';
+                });
             });
             document.getElementById('bgType').addEventListener('change', updateBgVisibility);
         }
 
         function setupNavListeners() {
-            const navItems = document.querySelectorAll('.nav-item');
-            const panels = document.querySelectorAll('.settings-panel');
-            navItems.forEach(item => {
+            document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function() {
-                    const panelId = this.dataset.panel;
-                    panels.forEach(p => p.classList.remove('visible'));
-                    document.getElementById(panelId).classList.add('visible');
-                    navItems.forEach(n => n.classList.remove('active'));
+                    document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('visible'));
+                    document.getElementById(this.dataset.panel).classList.add('visible');
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                     this.classList.add('active');
                 });
             });
         }
 
         function setupAutoSave() {
-            const allInputs = document.querySelectorAll(
-                '.settings-panel input, .settings-panel select, .settings-panel textarea');
-            allInputs.forEach(input => {
+            document.querySelectorAll('.settings-panel input, .settings-panel select, .settings-panel textarea').forEach(input => {
                 input.addEventListener('change', collectSettings);
                 input.addEventListener('input', collectSettings);
             });
         }
 
         function collectSettings() {
-            settings.bgType = document.getElementById('bgType').value;
-            settings.bgColor = document.getElementById('bgColor').value;
-            settings.bgColor2 = document.getElementById('bgColor2').value;
-            settings.gradientDir = document.getElementById('gradientDir').value;
-            settings.bgImageUrl = document.getElementById('bgImageUrl').value;
-            settings.bodyTextColor = document.getElementById('bodyTextColor').value;
-            settings.accentColor = document.getElementById('accentColor').value;
-            settings.logoText = document.getElementById('logoText').value;
-            settings.headerBg = document.getElementById('headerBg').value;
-            settings.headerTextColor = document.getElementById('headerTextColor').value;
-            settings.menuItems = document.getElementById('menuItems').value;
-            settings.stickyHeader = document.getElementById('stickyHeader').value;
-            settings.heroTitle = document.getElementById('heroTitle').value;
-            settings.heroSubtitle = document.getElementById('heroSubtitle').value;
-            settings.heroBgImage = document.getElementById('heroBgImage').value;
-            settings.heroHeight = parseInt(document.getElementById('heroHeight').value);
-            settings.heroBtnText = document.getElementById('heroBtnText').value;
-            settings.heroBtnLink = document.getElementById('heroBtnLink').value;
-            settings.heroBtnBg = document.getElementById('heroBtnBg').value;
-            settings.heroBtnTextColor = document.getElementById('heroBtnTextColor').value;
-            settings.heroBtnRadius = parseInt(document.getElementById('heroBtnRadius').value);
-            settings.heroBtnFontSize = parseFloat(document.getElementById('heroBtnFontSize').value);
-            settings.showCardButtons = document.getElementById('showCardButtons').value;
-            settings.cardBtnText = document.getElementById('cardBtnText').value;
-            settings.cardBtnBg = document.getElementById('cardBtnBg').value;
-            settings.cardBtnTextColor = document.getElementById('cardBtnTextColor').value;
-            settings.menuHoverColor = document.getElementById('menuHoverColor').value;
-            settings.menuHoverUnderline = document.getElementById('menuHoverUnderline').value;
-            settings.cardsTitle = document.getElementById('cardsTitle').value;
-            settings.card1Title = document.getElementById('card1Title').value;
-            settings.card1Desc = document.getElementById('card1Desc').value;
-            settings.card1Icon = document.getElementById('card1Icon').value;
-            settings.card2Title = document.getElementById('card2Title').value;
-            settings.card2Desc = document.getElementById('card2Desc').value;
-            settings.card2Icon = document.getElementById('card2Icon').value;
-            settings.card3Title = document.getElementById('card3Title').value;
-            settings.card3Desc = document.getElementById('card3Desc').value;
-            settings.card3Icon = document.getElementById('card3Icon').value;
-            settings.cardBg = document.getElementById('cardBg').value;
-            settings.cardsPerRow = document.getElementById('cardsPerRow').value;
-            settings.sectionPortfolioTitle = document.getElementById('sectionPortfolioTitle').value;
-            settings.sectionPortfolioText = document.getElementById('sectionPortfolioText').value;
-            settings.sectionContactsTitle = document.getElementById('sectionContactsTitle').value;
-            settings.sectionContactsText = document.getElementById('sectionContactsText').value;
-            settings.footerText = document.getElementById('footerText').value;
-            settings.footerBg = document.getElementById('footerBg').value;
-            settings.footerTextColor = document.getElementById('footerTextColor').value;
-            settings.footerSocials = document.getElementById('footerSocials').value;
-            settings.headingFont = document.getElementById('headingFont').value;
-            settings.bodyFont = document.getElementById('bodyFont').value;
-            settings.borderRadius = parseInt(document.getElementById('borderRadius').value);
-            settings.headingScale = parseInt(document.getElementById('headingScale').value);
-            settings.cardShadow = document.getElementById('cardShadow').value;
+            const ids = ['bgType', 'bgColor', 'bgColor2', 'gradientDir', 'bgImageUrl', 'bodyTextColor', 'accentColor', 'logoText', 'headerBg', 'headerTextColor', 'menuItems', 'stickyHeader', 'menuHoverColor', 'menuHoverUnderline', 'heroTitle', 'heroSubtitle', 'heroBgImage', 'heroHeight', 'heroBtnText', 'heroBtnLink', 'heroBtnBg', 'heroBtnTextColor', 'heroBtnRadius', 'heroBtnFontSize', 'showCardButtons', 'cardBtnText', 'cardBtnLink', 'cardBtnBg', 'cardBtnTextColor', 'extraBtn1Show', 'extraBtn1Text', 'extraBtn1Link', 'extraBtn1Bg', 'extraBtn1TextColor', 'extraBtn2Show', 'extraBtn2Text', 'extraBtn2Link', 'extraBtn2Bg', 'extraBtn2TextColor', 'cardsTitle', 'cardBg', 'cardsPerRow', 'card1Title', 'card1Desc', 'card1Icon', 'card2Title', 'card2Desc', 'card2Icon', 'card3Title', 'card3Desc', 'card3Icon', 'sectionPortfolioTitle', 'sectionPortfolioText', 'sectionContactsTitle', 'sectionContactsText', 'footerText', 'footerBg', 'footerTextColor', 'footerSocials', 'socialsStyle', 'socialsSize', 'headingFont', 'bodyFont', 'borderRadius', 'headingScale', 'cardShadow'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (el.type === 'range') settings[id] = parseInt(el.value);
+                else settings[id] = el.value;
+            });
             saveSettings();
         }
 
-        function applyChanges() {
-            collectSettings();
+        function applyChanges() { collectSettings();
             updatePreview();
-            showToast('✅ Изменения применены!');
-        }
+            showToast('✅ Применено!'); }
 
         function resetSettings() {
-            if (confirm('Сбросить все настройки к исходному шаблону?')) {
+            if (confirm('Сбросить всё к шаблону?')) {
                 settings = JSON.parse(JSON.stringify(defaultSettings));
                 populateForm();
                 collectSettings();
                 updatePreview();
-                showToast('↺ Настройки сброшены');
+                showToast('↺ Сброшено');
             }
         }
 
-        function dismissGuide() {
-            document.getElementById('guideBanner').classList.add('guide-hidden');
-            localStorage.setItem('siteforge_guide_dismissed_v2', 'true');
+        function dismissGuide() { document.getElementById('guideBanner').classList.add('guide-hidden');
+            localStorage.setItem('siteforge_guide_v4', 'true'); }
+
+        function showToast(m) { const t = document.createElement('div');
+            t.className = 'toast';
+            t.textContent = m;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 2400); }
+
+        // Функция для нормализации URL (добавляет https:// если нет протокола)
+        function fixUrl(url) {
+            if (!url) return '#';
+            url = url.trim();
+            if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//')) return url;
+            if (url.startsWith('#')) return url;
+            if (url.startsWith('/')) return url;
+            return 'https://' + url;
         }
 
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2400);
-        }
-
-        // ===== ГЕНЕРАЦИЯ HTML САЙТА =====
         function generateSiteHTML() {
             const s = settings;
             const menuItems = s.menuItems.split(',').map(i => i.trim()).filter(i => i);
             const socialsRaw = s.footerSocials.split(',').map(i => i.trim()).filter(i => i);
 
             function slugify(text) {
-                const map = {
-                    'а': 'a',
-                    'б': 'b',
-                    'в': 'v',
-                    'г': 'g',
-                    'д': 'd',
-                    'е': 'e',
-                    'ё': 'e',
-                    'ж': 'zh',
-                    'з': 'z',
-                    'и': 'i',
-                    'й': 'y',
-                    'к': 'k',
-                    'л': 'l',
-                    'м': 'm',
-                    'н': 'n',
-                    'о': 'o',
-                    'п': 'p',
-                    'р': 'r',
-                    'с': 's',
-                    'т': 't',
-                    'у': 'u',
-                    'ф': 'f',
-                    'х': 'h',
-                    'ц': 'ts',
-                    'ч': 'ch',
-                    'ш': 'sh',
-                    'щ': 'sch',
-                    'ъ': '',
-                    'ы': 'y',
-                    'ь': '',
-                    'э': 'e',
-                    'ю': 'yu',
-                    'я': 'ya'
-                };
-                return text.toLowerCase().split('').map(c => map[c] || c).join('')
-                    .replace(/[^a-z0-9]+/g, '-')
-                    .replace(/^-|-$/g, '');
+                const map = { 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya' };
+                return text.toLowerCase().split('').map(c => map[c] || c).join('').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
             }
 
-            const menuWithIds = menuItems.map((item, index) => {
-                let id;
-                if (index === 0) id = 'home';
-                else id = slugify(item);
-                return { name: item, id: id };
-            });
-
-            const servicesItem = menuWithIds.find(item =>
-                item.name.toLowerCase().includes('услуг') || item.name.toLowerCase().includes('services')
-            );
+            const menuWithIds = menuItems.map((item, i) => ({ name: item, id: i === 0 ? 'home' : slugify(item) }));
+            const servicesItem = menuWithIds.find(item => item.name.toLowerCase().includes('услуг') || item.name.toLowerCase().includes('services'));
             const servicesId = servicesItem ? servicesItem.id : 'uslugi';
             const heroLink = s.heroBtnLink || servicesId;
 
             function makeExtraSection(name, id, title, text) {
-                if (!title) title = name;
-                if (!text) text = 'Содержимое этого раздела можно изменить в конструкторе.';
-                return `
-        <section class="extra-section" id="${id}">
-            <div class="container">
-                <h2>${title}</h2>
-                <p>${text}</p>
-            </div>
-        </section>`;
+                return `<section class="extra-section" id="${id}"><div class="container"><h2>${title||name}</h2><p>${text||'Содержимое можно изменить в конструкторе.'}</p></div></section>`;
             }
 
             function generateExtraSections() {
                 let html = '';
-                const sectionMap = {
-                    'portfolio': { title: s.sectionPortfolioTitle, text: s.sectionPortfolioText },
-                    'kontakty': { title: s.sectionContactsTitle, text: s.sectionContactsText },
-                    'contacts': { title: s.sectionContactsTitle, text: s.sectionContactsText },
-                };
+                const map = { 'portfolio': { title: s.sectionPortfolioTitle, text: s.sectionPortfolioText }, 'kontakty': { title: s.sectionContactsTitle, text: s.sectionContactsText }, 'contacts': { title: s.sectionContactsTitle, text: s.sectionContactsText } };
                 menuWithIds.forEach(item => {
-                    if (item.id === 'home') return;
-                    if (item.id === servicesId) return;
-                    const preset = sectionMap[item.id] || { title: item.name, text: 'Содержимое этого раздела можно изменить в конструкторе.' };
-                    html += makeExtraSection(item.name, item.id, preset.title, preset.text);
+                    if (item.id === 'home' || item.id === servicesId) return;
+                    const p = map[item.id] || { title: item.name, text: 'Содержимое этого раздела можно изменить в конструкторе.' };
+                    html += makeExtraSection(item.name, item.id, p.title, p.text);
                 });
                 return html;
             }
             const extraSections = generateExtraSections();
 
-            let bgCSS = '';
-            if (s.bgType === 'color') bgCSS = `background-color: ${s.bgColor};`;
-            else if (s.bgType === 'gradient') bgCSS =
-                `background: linear-gradient(${s.gradientDir}, ${s.bgColor}, ${s.bgColor2});`;
-            else if (s.bgType === 'image' && s.bgImageUrl) bgCSS =
-                `background: url('${s.bgImageUrl}') center/cover no-repeat fixed;`;
-            else bgCSS = `background-color: ${s.bgColor};`;
-
+            let bgCSS = s.bgType === 'color' ? `background-color:${s.bgColor};` : s.bgType === 'gradient' ? `background:linear-gradient(${s.gradientDir},${s.bgColor},${s.bgColor2});` : s.bgType === 'image' && s.bgImageUrl ? `background:url('${s.bgImageUrl}') center/cover no-repeat fixed;` : `background-color:${s.bgColor};`;
             const br = s.borderRadius;
             const hs = s.headingScale / 100;
             const stickyCSS = s.stickyHeader === 'yes' ? 'position:sticky;top:0;' : 'position:relative;';
-            const heroBgCSS = s.heroBgImage ?
-                `background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${s.heroBgImage}') center/cover; color:#fff;` :
-                '';
+            const heroBgCSS = s.heroBgImage ? `background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('${s.heroBgImage}') center/cover;color:#fff;` : '';
             const heroTextColor = s.heroBgImage ? '#fff' : s.bodyTextColor;
             const heroSubtitleColor = s.heroBgImage ? 'rgba(255,255,255,0.85)' : '#555';
-            const menuHoverUnderlineCSS = s.menuHoverUnderline === 'yes' ? 'text-decoration:underline;' :
-                'text-decoration:none;';
-            const cardShadowCSS = {
-                'soft': '0 4px 24px rgba(0,0,0,0.06)',
-                'medium': '0 8px 30px rgba(0,0,0,0.12)',
-                'hard': '0 12px 40px rgba(0,0,0,0.2)',
-                'none': 'none'
-            } [s.cardShadow] || '0 4px 24px rgba(0,0,0,0.06)';
-            const cardHoverShadowCSS = {
-                'soft': '0 16px 40px rgba(0,0,0,0.12)',
-                'medium': '0 20px 50px rgba(0,0,0,0.2)',
-                'hard': '0 24px 60px rgba(0,0,0,0.3)',
-                'none': 'none'
-            } [s.cardShadow] || '0 16px 40px rgba(0,0,0,0.12)';
-            const cardsPerRowCSS = {
-                '2': 'repeat(auto-fit, minmax(350px, 1fr))',
-                '3': 'repeat(auto-fit, minmax(280px, 1fr))',
-                '4': 'repeat(auto-fit, minmax(220px, 1fr))'
-            } [s.cardsPerRow] || 'repeat(auto-fit, minmax(280px, 1fr))';
-
+            const menuHoverUnderlineCSS = s.menuHoverUnderline === 'yes' ? 'text-decoration:underline;' : 'text-decoration:none;';
+            const shadowMap = { 'soft': ['0 4px 24px rgba(0,0,0,0.06)', '0 16px 40px rgba(0,0,0,0.12)'], 'medium': ['0 8px 30px rgba(0,0,0,0.12)', '0 20px 50px rgba(0,0,0,0.2)'], 'hard': ['0 12px 40px rgba(0,0,0,0.2)', '0 24px 60px rgba(0,0,0,0.3)'], 'none': ['none', 'none'] };
+            const [cardShadow, cardHoverShadow] = shadowMap[s.cardShadow] || shadowMap['soft'];
+            const cardsPerRowCSS = { '2': 'repeat(auto-fit,minmax(350px,1fr))', '3': 'repeat(auto-fit,minmax(280px,1fr))', '4': 'repeat(auto-fit,minmax(220px,1fr))' } [s.cardsPerRow] || 'repeat(auto-fit,minmax(280px,1fr))';
             const menuHTML = menuWithIds.map(m => `<a href="#${m.id}">${m.name}</a>`).join('\n                ');
 
-            const socialsHTML = socialsRaw.map(soc => {
+            // Соцсети с нормальными ссылками и без лишних разделителей
+            const socialsParsed = socialsRaw.map(soc => {
                 const parts = soc.split(':');
-                const name = parts[0].trim();
-                const url = parts[1] ? parts[1].trim() : '#';
-                return `<a href="${url}" target="_blank" rel="noopener">${name}</a>`;
-            }).join('  ·  ');
+                return { name: parts[0]?.trim() || '', url: fixUrl(parts[1]?.trim() || '#'), icon: parts[2]?.trim() || '' };
+            }).filter(s => s.name);
 
-            const cardBtnsHTML = s.showCardButtons === 'yes' ? `
-        <a href="#${servicesId}" class="card-btn">${s.cardBtnText}</a>` : '';
+            let socialsHTML = '';
+            if (s.socialsStyle === 'buttons') {
+                const sizeClass = s.socialsSize === 'large' ? 'social-btn-lg' : s.socialsSize === 'small' ? 'social-btn-sm' : '';
+                socialsHTML = socialsParsed.map(soc => `<a href="${soc.url}" target="_blank" rel="noopener" class="social-btn ${sizeClass}">${soc.icon} ${soc.name}</a>`).join('');
+            } else if (s.socialsStyle === 'icons-only') {
+                const sizeClass = s.socialsSize === 'large' ? 'social-icon-lg' : s.socialsSize === 'small' ? 'social-icon-sm' : '';
+                socialsHTML = socialsParsed.map(soc => `<a href="${soc.url}" target="_blank" rel="noopener" class="social-icon ${sizeClass}" title="${soc.name}">${soc.icon}</a>`).join('');
+            } else {
+                // Текстовый стиль — без разделителей, с отступами через gap в CSS
+                socialsHTML = socialsParsed.map(soc => `<a href="${soc.url}" target="_blank" rel="noopener">${soc.icon} ${soc.name}</a>`).join('');
+            }
+
+            const cardBtnsHTML = s.showCardButtons === 'yes' ? `<a href="#${s.cardBtnLink||servicesId}" class="card-btn">${s.cardBtnText}</a>` : '';
+            const extraBtn1HTML = s.extraBtn1Show === 'yes' ? `<div style="text-align:center;padding:30px 24px 10px;"><a href="${s.extraBtn1Link.startsWith('#')||s.extraBtn1Link.startsWith('http')?s.extraBtn1Link:'#'+s.extraBtn1Link}" class="btn-extra-1">${s.extraBtn1Text}</a></div>` : '';
+            const extraBtn2HTML = s.extraBtn2Show === 'yes' ? `<div style="text-align:center;padding:30px 24px;"><a href="${fixUrl(s.extraBtn2Link)}" class="btn-extra-2" target="_blank" rel="noopener">${s.extraBtn2Text}</a></div>` : '';
 
             return `<!DOCTYPE html>
         <html lang="ru">
@@ -1298,182 +813,76 @@
         <style>
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
-        body{
-            font-family:${s.bodyFont};
-            ${bgCSS}
-            color:${s.bodyTextColor};
-            line-height:1.7;
-            min-height:100vh;
-        }
+        body{font-family:${s.bodyFont};${bgCSS}color:${s.bodyTextColor};line-height:1.7;min-height:100vh}
         a{color:${s.accentColor};transition:all 0.2s}
         h1,h2,h3{font-family:${s.headingFont};font-weight:700;line-height:1.2}
-        h1{font-size:${3.4*hs}rem}
-        h2{font-size:${2.4*hs}rem}
-        h3{font-size:${1.4*hs}rem}
+        h1{font-size:${3.4*hs}rem}h2{font-size:${2.4*hs}rem}h3{font-size:${1.4*hs}rem}
         .container{max-width:1200px;margin:0 auto;padding:0 24px}
-
-        .header{
-            background:${s.headerBg};
-            color:${s.headerTextColor};
-            padding:14px 0;
-            ${stickyCSS}
-            z-index:100;
-            backdrop-filter:blur(10px);
-        }
+        .header{background:${s.headerBg};color:${s.headerTextColor};padding:14px 0;${stickyCSS}z-index:100;backdrop-filter:blur(10px)}
         .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
         .logo{font-size:1.5rem;font-weight:800;font-family:${s.headingFont};letter-spacing:-0.5px}
         .logo a{color:${s.headerTextColor};text-decoration:none}
         .header nav{display:flex;gap:24px;flex-wrap:wrap}
         .header nav a{color:${s.headerTextColor};text-decoration:none;font-weight:500;font-size:0.9rem;opacity:0.85;transition:all 0.2s}
         .header nav a:hover{opacity:1;color:${s.menuHoverColor};${menuHoverUnderlineCSS}}
-
-        .hero{
-            text-align:center;
-            padding:60px 24px;
-            max-width:750px;
-            margin:0 auto;
-            min-height:${s.heroHeight}px;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            ${heroBgCSS}
-        }
+        .hero{text-align:center;padding:60px 24px;max-width:750px;margin:0 auto;min-height:${s.heroHeight}px;display:flex;flex-direction:column;justify-content:center;${heroBgCSS}}
         .hero h1{margin-bottom:18px;color:${heroTextColor}}
         .hero p{font-size:1.15rem;color:${heroSubtitleColor};margin-bottom:32px}
-        .btn-hero{
-            display:inline-block;
-            padding:15px 42px;
-            background:${s.heroBtnBg};
-            color:${s.heroBtnTextColor};
-            border-radius:${s.heroBtnRadius}px;
-            text-decoration:none;
-            font-weight:600;
-            font-size:${s.heroBtnFontSize}rem;
-            transition:transform 0.3s,box-shadow 0.3s;
-            box-shadow:0 10px 30px rgba(0,0,0,0.15);
-        }
+        .btn-hero{display:inline-block;padding:15px 42px;background:${s.heroBtnBg};color:${s.heroBtnTextColor};border-radius:${s.heroBtnRadius}px;text-decoration:none;font-weight:600;font-size:${s.heroBtnFontSize}rem;transition:transform 0.3s,box-shadow 0.3s;box-shadow:0 10px 30px rgba(0,0,0,0.15)}
         .btn-hero:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.25)}
-
+        .btn-extra-1{display:inline-block;padding:14px 36px;background:${s.extraBtn1Bg};color:${s.extraBtn1TextColor};border-radius:${br}px;text-decoration:none;font-weight:600;font-size:1rem;transition:transform 0.3s,box-shadow 0.3s;box-shadow:0 8px 25px rgba(0,0,0,0.12)}
+        .btn-extra-1:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,0.2)}
+        .btn-extra-2{display:inline-block;padding:14px 36px;background:${s.extraBtn2Bg};color:${s.extraBtn2TextColor};border-radius:${br}px;text-decoration:none;font-weight:600;font-size:1rem;transition:transform 0.3s,box-shadow 0.3s;box-shadow:0 8px 25px rgba(0,0,0,0.12)}
+        .btn-extra-2:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,0.2)}
         .cards-section{padding:60px 24px;text-align:center}
         .cards-section h2{margin-bottom:40px}
-        .cards-grid{
-            display:grid;
-            grid-template-columns:${cardsPerRowCSS};
-            gap:24px;
-            max-width:1100px;
-            margin:0 auto;
-        }
-        .card{
-            background:${s.cardBg};
-            padding:36px 28px;
-            border-radius:${br}px;
-            box-shadow:${cardShadowCSS};
-            transition:transform 0.3s,box-shadow 0.3s;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            text-align:center;
-        }
-        .card:hover{transform:translateY(-6px);box-shadow:${cardHoverShadowCSS}}
+        .cards-grid{display:grid;grid-template-columns:${cardsPerRowCSS};gap:24px;max-width:1100px;margin:0 auto}
+        .card{background:${s.cardBg};padding:36px 28px;border-radius:${br}px;box-shadow:${cardShadow};transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;align-items:center;text-align:center}
+        .card:hover{transform:translateY(-6px);box-shadow:${cardHoverShadow}}
         .card .icon{font-size:2.5rem;margin-bottom:14px;display:block}
         .card h3{margin-bottom:10px;color:${s.bodyTextColor}}
         .card p{color:#666;font-size:0.9rem;margin-bottom:16px;flex:1}
-        .card-btn{
-            display:inline-block;
-            padding:10px 24px;
-            background:${s.cardBtnBg};
-            color:${s.cardBtnTextColor};
-            border-radius:${br}px;
-            text-decoration:none;
-            font-weight:600;
-            font-size:0.85rem;
-            transition:transform 0.3s,box-shadow 0.3s;
-            margin-top:auto;
-        }
+        .card-btn{display:inline-block;padding:10px 24px;background:${s.cardBtnBg};color:${s.cardBtnTextColor};border-radius:${br}px;text-decoration:none;font-weight:600;font-size:0.85rem;transition:transform 0.3s,box-shadow 0.3s;margin-top:auto}
         .card-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
-
         .extra-section{padding:80px 24px;text-align:center;max-width:800px;margin:0 auto}
         .extra-section h2{margin-bottom:16px}
         .extra-section p{color:#555;font-size:1.05rem;line-height:1.8}
-
-        .footer{
-            background:${s.footerBg};
-            color:${s.footerTextColor};
-            text-align:center;
-            padding:32px 24px;
-            margin-top:40px;
-        }
-        .footer .socials{margin-top:10px;font-size:0.85rem}
-        .footer .socials a{color:${s.footerTextColor};text-decoration:none}
-        .footer .socials a:hover{text-decoration:underline;color:#fff}
-        .footer .copyright-note{font-size:0.7rem;margin-top:8px;opacity:0.5}
-
-        @media(max-width:768px){
-            h1{font-size:${2.2*hs}rem}
-            h2{font-size:${1.6*hs}rem}
-            .hero{padding:40px 20px;min-height:auto}
-            .header .container{flex-direction:column}
-            .cards-grid{grid-template-columns:1fr}
-        }
+        .footer{background:${s.footerBg};color:${s.footerTextColor};text-align:center;padding:32px 24px;margin-top:40px}
+        .footer .socials{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;align-items:center;margin-top:10px}
+        .footer .socials a{color:${s.footerTextColor};text-decoration:none;font-size:0.85rem;transition:all 0.2s}
+        .footer .socials a:hover{color:#fff}
+        .social-btn{display:inline-block;padding:8px 18px;background:transparent;border:1px solid ${s.footerTextColor};border-radius:${br}px;color:${s.footerTextColor};text-decoration:none;font-size:0.8rem;transition:all 0.2s}
+        .social-btn:hover{background:${s.footerTextColor};color:${s.footerBg};text-decoration:none!important}
+        .social-btn-lg{padding:12px 24px;font-size:0.95rem}
+        .social-btn-sm{padding:5px 12px;font-size:0.7rem}
+        .social-icon{font-size:1.6rem;text-decoration:none;transition:transform 0.2s}
+        .social-icon:hover{transform:scale(1.2)}
+        .social-icon-lg{font-size:2.2rem}
+        .social-icon-sm{font-size:1.3rem}
+        .footer .copyright-note{font-size:0.7rem;margin-top:12px;opacity:0.5}
+        @media(max-width:768px){h1{font-size:${2.2*hs}rem}h2{font-size:${1.6*hs}rem}.hero{padding:40px 20px;min-height:auto}.header .container{flex-direction:column}.cards-grid{grid-template-columns:1fr}}
         </style>
         </head>
         <body>
-        <header class="header">
-            <div class="container">
-                <div class="logo"><a href="#home">${s.logoText}</a></div>
-                <nav>${menuHTML}</nav>
-            </div>
-        </header>
-
-        <section class="hero" id="home">
-            <h1>${s.heroTitle}</h1>
-            <p>${s.heroSubtitle}</p>
-            <a href="#${heroLink}" class="btn-hero">${s.heroBtnText}</a>
-        </section>
-
+        <header class="header"><div class="container"><div class="logo"><a href="#home">${s.logoText}</a></div><nav>${menuHTML}</nav></div></header>
+        <section class="hero" id="home"><h1>${s.heroTitle}</h1><p>${s.heroSubtitle}</p><a href="#${heroLink}" class="btn-hero">${s.heroBtnText}</a></section>
+        ${extraBtn1HTML}
         ${extraSections}
-
-        <section class="cards-section" id="${servicesId}">
-            <h2>${s.cardsTitle}</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <span class="icon">${s.card1Icon}</span>
-                    <h3>${s.card1Title}</h3>
-                    <p>${s.card1Desc}</p>
-                    ${cardBtnsHTML}
-                </div>
-                <div class="card">
-                    <span class="icon">${s.card2Icon}</span>
-                    <h3>${s.card2Title}</h3>
-                    <p>${s.card2Desc}</p>
-                    ${cardBtnsHTML}
-                </div>
-                <div class="card">
-                    <span class="icon">${s.card3Icon}</span>
-                    <h3>${s.card3Title}</h3>
-                    <p>${s.card3Desc}</p>
-                    ${cardBtnsHTML}
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <p>${s.footerText}</p>
-            <div class="socials">${socialsHTML}</div>
-            <p class="copyright-note">Создано в SiteForge © CayPlay 2026</p>
-        </footer>
-        </body>
-        </html>`;
+        ${extraBtn2HTML}
+        <section class="cards-section" id="${servicesId}"><h2>${s.cardsTitle}</h2><div class="cards-grid">
+        <div class="card"><span class="icon">${s.card1Icon}</span><h3>${s.card1Title}</h3><p>${s.card1Desc}</p>${cardBtnsHTML}</div>
+        <div class="card"><span class="icon">${s.card2Icon}</span><h3>${s.card2Title}</h3><p>${s.card2Desc}</p>${cardBtnsHTML}</div>
+        <div class="card"><span class="icon">${s.card3Icon}</span><h3>${s.card3Title}</h3><p>${s.card3Desc}</p>${cardBtnsHTML}</div>
+        </div></section>
+        <footer class="footer"><p>${s.footerText}</p><div class="socials">${socialsHTML}</div><p class="copyright-note">Создано в SiteForge © CayPlay 2026</p></footer>
+        </body></html>`;
         }
 
-        function updatePreview() {
-            const iframe = document.getElementById('previewFrame');
-            iframe.srcdoc = generateSiteHTML();
-        }
+        function updatePreview() { document.getElementById('previewFrame').srcdoc = generateSiteHTML(); }
 
         function switchDevice(device, btn) {
-            const iframe = document.getElementById('previewFrame');
-            iframe.className = device;
+            const frame = document.getElementById('previewFrame');
+            frame.className = device;
             document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
@@ -1488,10 +897,9 @@
             a.download = 'мой-сайт.html';
             a.click();
             URL.revokeObjectURL(url);
-            showToast('💾 Сайт скачан! Все кнопки и ссылки рабочие.');
+            showToast('💾 Сайт скачан!');
         }
-
         init();
     </script>
-
-</body></html>
+</body>
+</html>
