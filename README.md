@@ -76,4 +76,14 @@
 ## 📝 Пример соцсетей
 
 В поле «Список соцсетей» можно написать так:
+VK:vk.com:📘, Telegram:t.me:✈️, YouTube:youtube.com:▶️, GitHub:github.com:💻
+Или даже проще (без https://): VK:vk.com/username:📘, Telegram:t.me/username:✈️
+
+
+## © Автор
+
+**CayPlay 2026**. Все права защищены.
+
+Создано с любовью к простоте и красоте ✨
+
 
