@@ -60,8 +60,8 @@
         blk('hero',{eyebrow:'ORBIT 3.0',title:'Вся работа команды — в одном спокойном пространстве',text:'Задачи, документы, решения и прогресс без десяти вкладок и бесконечных сообщений.',primaryText:'Попробовать бесплатно',primaryLink:'#pricing',secondaryText:'Возможности',secondaryLink:'#features',showSecondary:true,align:'left',minHeight:740,backgroundMode:'gradient',background:'#071a1d',background2:'#126b65'}),
         blk('features',{eyebrow:'ОДНО МЕСТО',title:'Меньше переключений — больше фокуса',subtitle:'Основные рабочие процессы в одном понятном интерфейсе.',columns:3,items:[{icon:'✓',title:'Задачи',text:'Сроки, ответственные и приоритеты с первого взгляда.'},{icon:'⌘',title:'Документы',text:'Заметки и решения всегда связаны с реальной работой.'},{icon:'↗',title:'Прогресс',text:'Понятные отчёты без ручных таблиц.'}]},{anchor:'features',showInNav:true,navLabel:'Возможности'}),
         blk('stats',{columns:4,items:[{value:'34%',label:'меньше встреч'},{value:'2.4×',label:'быстрее поиск'},{value:'18k+',label:'команд'},{value:'99.98%',label:'uptime'}]}),
-        blk('pricing',{eyebrow:'ТАРИФЫ',title:'Начните бесплатно, растите без ограничений',subtitle:'Без карты на старте.',columns:3},{anchor:'pricing',showInNav:true,navLabel:'Цены'}),
-        blk('faq',{eyebrow:'FAQ',title:'Частые вопросы'},{anchor:'faq',showInNav:true,navLabel:'FAQ'}),
+        blk('pricing',{eyebrow:'ТАРИФЫ',title:'Начните бесплатно, растите без ограничений',subtitle:'Без карты на старте.',columns:3,items:[{name:'Free',price:'0 ₽',period:'/ мес',description:'Для маленькой команды',featured:false,features:['До 5 участников','Задачи и документы','1 ГБ файлов'],buttonText:'Начать',buttonLink:'#'},{name:'Team',price:'790 ₽',period:'/ пользователь',description:'Для растущих команд',featured:true,features:['Без лимита проектов','Автоматизации','История изменений'],buttonText:'14 дней бесплатно',buttonLink:'#'},{name:'Business',price:'По запросу',period:'',description:'Для больших компаний',featured:false,features:['SSO и права','Аудит и SLA','Персональная поддержка'],buttonText:'Связаться',buttonLink:'#'}]},{anchor:'pricing',showInNav:true,navLabel:'Цены'}),
+        blk('faq',{eyebrow:'FAQ',title:'Частые вопросы',items:[{question:'Нужна банковская карта для старта?',answer:'Нет. Бесплатный тариф можно включить без карты и пользоваться им без ограничения по времени.'},{question:'Можно пригласить внешних участников?',answer:'Да. Гостей можно добавлять в отдельные проекты и документы без доступа ко всему пространству.'},{question:'Как перенести данные из другого сервиса?',answer:'Импорт доступен для популярных форматов, а для Business команда поможет с миграцией.'}]},{anchor:'faq',showInNav:true,navLabel:'FAQ'}),
         blk('cta',{eyebrow:'ГОТОВЫ?',title:'Соберите работу команды в одном месте',text:'Создайте пространство Orbit за минуту.',buttonText:'Начать бесплатно',buttonLink:'#pricing',align:'center',background2:'#21b899'})
       ])
     },
@@ -72,8 +72,8 @@
         blk('stats',{columns:4,items:[{value:'6',label:'спикеров'},{value:'4.5 ч',label:'программы'},{value:'350',label:'гостей'},{value:'1',label:'сильный вечер'}]}),
         blk('features',{eyebrow:'PROGRAM',title:'Не лекции ради лекций',subtitle:'Короткие выступления, реальные кейсы и время поговорить.',columns:3,items:[{icon:'19:00',title:'Как запускать',text:'Что делать, когда идеального момента не будет.'},{icon:'20:10',title:'Как расти',text:'Путь продукта от первой версии до большой аудитории.'},{icon:'21:20',title:'Как не выгореть',text:'Разговор о темпе, команде и любопытстве.'}]},{anchor:'program',showInNav:true,navLabel:'Программа'}),
         blk('cards',{eyebrow:'SPEAKERS',title:'Люди, которые покажут процесс изнутри',subtitle:'Опыт, ошибки и выводы без рекламных презентаций.',columns:3,items:[{tag:'PRODUCT',title:'Лена Миронова',text:'Product Director · запуск сложных продуктов.',buttonText:'19:00',buttonLink:'#tickets'},{tag:'DESIGN',title:'Илья Морозов',text:'Creative Lead · визуальный язык брендов.',buttonText:'20:10',buttonLink:'#tickets'},{tag:'FOUNDERS',title:'Артём Левин',text:'Founder · рост команды и сложные решения.',buttonText:'21:20',buttonLink:'#tickets'}]}),
-        blk('pricing',{eyebrow:'TICKETS',title:'Выберите формат вечера',subtitle:'Количество офлайн-мест ограничено.',columns:3},{anchor:'tickets',showInNav:true,navLabel:'Билеты'}),
-        blk('faq',{eyebrow:'FAQ',title:'Перед тем как прийти'}),
+        blk('pricing',{eyebrow:'TICKETS',title:'Выберите формат вечера',subtitle:'Количество офлайн-мест ограничено.',columns:3,items:[{name:'Online',price:'990 ₽',period:'',description:'Прямая трансляция',featured:false,features:['Все выступления','Запись на 7 дней','Чат участников'],buttonText:'Купить',buttonLink:'#contact'},{name:'Live',price:'2 490 ₽',period:'',description:'В зале + afterparty',featured:true,features:['Место в зале','Нетворкинг','Afterparty'],buttonText:'Забронировать',buttonLink:'#contact'},{name:'Team',price:'7 900 ₽',period:'',description:'4 места для команды',featured:false,features:['4 билета Live','Общая зона','Подарочный набор'],buttonText:'Для команды',buttonLink:'#contact'}]},{anchor:'tickets',showInNav:true,navLabel:'Билеты'}),
+        blk('faq',{eyebrow:'FAQ',title:'Перед тем как прийти',items:[{question:'Где пройдёт событие?',answer:'Точный адрес пространства придёт на почту после регистрации. Площадка находится в центре города.'},{question:'Будет ли запись?',answer:'Да. Запись доступна владельцам Online и Live билетов в течение 7 дней.'},{question:'Можно вернуть билет?',answer:'Да, возврат доступен не позднее чем за 72 часа до начала события.'}]}),
         blk('contact',{eyebrow:'ВОПРОСЫ',title:'Нужно уточнить детали?',text:'Ответим по билетам, партнёрству и участию.',email:'hello@digitalnight.events',phone:'+7 (900) 202-09-12',address:'Москва',buttonText:'Написать организаторам'},{anchor:'contact',showInNav:true,navLabel:'Контакты'})
       ])
     },
@@ -175,6 +175,17 @@
   }, true);
 
   const boot = () => {
+    const state = getState();
+    const legacy = state.current;
+    const untouchedLegacy = legacy && legacy.name === 'Бизнес-сайт' && legacy.site?.header?.logoText === 'NOVA' && !legacy.site?.customCss && legacy.blocks?.[0]?.data?.title === 'Сайт, который хочется запомнить';
+    if (untouchedLegacy && !sessionStorage.getItem('siteforge_v83_migrated')) {
+      const next = templates.find(t => t.id === 'business').build();
+      next.id = state.activeId; next.createdAt = legacy.createdAt || Date.now();
+      state.map[state.activeId] = next;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.map));
+      sessionStorage.setItem('siteforge_v83_migrated','1');
+      location.reload(); return;
+    }
     renderGallery();
     const grid = $('#templateGrid');
     if (grid) new MutationObserver(() => {
