@@ -1,0 +1,30 @@
+name: SiteForge v8.3 safe migration patch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/siteforge-v83-migrate-safe.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Patch migration logic
+        run: python .github/scripts/v83_migrate_patch.py
+      - name: Validate JavaScript
+        run: node --check v8-premium-templates.js
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v8-premium-templates.js
+          git commit -m "Safely migrate untouched legacy templates to premium versions"
+          git push origin main
