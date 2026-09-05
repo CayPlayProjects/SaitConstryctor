@@ -77,11 +77,45 @@
   height: 16px;
 }
 
+/* Strict optical centering for icon-only controls.
+   Legacy button styles used line-height/padding intended for text,
+   which made SVG icons drift from the visual center. */
+.icon-btn,
+.structure-action,
+.mini-action,
+.v8-sheet-close {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+.icon-btn:has(> .sf-icon),
+.structure-action:has(> .sf-icon),
+.mini-action:has(> .sf-icon),
+.v8-sheet-close:has(> .sf-icon) {
+  padding: 0 !important;
+  text-indent: 0 !important;
+}
+
+.icon-btn > .sf-icon,
+.structure-action > .sf-icon,
+.mini-action > .sf-icon,
+.v8-sheet-close > .sf-icon {
+  margin: 0 !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  vertical-align: middle !important;
+}
+
 .v8-sheet-close,
 .icon-btn[data-close-modal],
 #rightCloseBtn {
   display: inline-grid !important;
   place-items: center !important;
+  padding: 0 !important;
 }
 
 @media (max-width: 760px) {
