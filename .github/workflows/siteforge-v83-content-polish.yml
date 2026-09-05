@@ -1,0 +1,48 @@
+name: SiteForge v8.3 content polish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/siteforge-v83-content-polish.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Polish template-specific content
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('v8-premium-templates.js')
+          s = p.read_text(encoding='utf-8')
+
+          s = s.replace("blk('pricing',{eyebrow:'ТАРИФЫ',title:'Начните бесплатно, растите без ограничений',subtitle:'Без карты на старте.',columns:3},{anchor:'pricing',showInNav:true,navLabel:'Цены'}),", "blk('pricing',{eyebrow:'ТАРИФЫ',title:'Начните бесплатно, растите без ограничений',subtitle:'Без карты на старте.',columns:3,items:[{name:'Free',price:'0 ₽',period:'/ мес',description:'Для маленькой команды',featured:false,features:['До 5 участников','Задачи и документы','1 ГБ файлов'],buttonText:'Начать',buttonLink:'#'},{name:'Team',price:'790 ₽',period:'/ пользователь',description:'Для растущих команд',featured:true,features:['Без лимита проектов','Автоматизации','История изменений'],buttonText:'14 дней бесплатно',buttonLink:'#'},{name:'Business',price:'По запросу',period:'',description:'Для больших компаний',featured:false,features:['SSO и права','Аудит и SLA','Персональная поддержка'],buttonText:'Связаться',buttonLink:'#'}]},{anchor:'pricing',showInNav:true,navLabel:'Цены'}),")
+          s = s.replace("blk('faq',{eyebrow:'FAQ',title:'Частые вопросы'},{anchor:'faq',showInNav:true,navLabel:'FAQ'}),", "blk('faq',{eyebrow:'FAQ',title:'Частые вопросы',items:[{question:'Нужна банковская карта для старта?',answer:'Нет. Бесплатный тариф можно включить без карты и пользоваться им без ограничения по времени.'},{question:'Можно пригласить внешних участников?',answer:'Да. Гостей можно добавлять в отдельные проекты и документы без доступа ко всему пространству.'},{question:'Как перенести данные из другого сервиса?',answer:'Импорт доступен для популярных форматов, а для Business команда поможет с миграцией.'}]},{anchor:'faq',showInNav:true,navLabel:'FAQ'}),")
+          s = s.replace("blk('pricing',{eyebrow:'TICKETS',title:'Выберите формат вечера',subtitle:'Количество офлайн-мест ограничено.',columns:3},{anchor:'tickets',showInNav:true,navLabel:'Билеты'}),", "blk('pricing',{eyebrow:'TICKETS',title:'Выберите формат вечера',subtitle:'Количество офлайн-мест ограничено.',columns:3,items:[{name:'Online',price:'990 ₽',period:'',description:'Прямая трансляция',featured:false,features:['Все выступления','Запись на 7 дней','Чат участников'],buttonText:'Купить',buttonLink:'#contact'},{name:'Live',price:'2 490 ₽',period:'',description:'В зале + afterparty',featured:true,features:['Место в зале','Нетворкинг','Afterparty'],buttonText:'Забронировать',buttonLink:'#contact'},{name:'Team',price:'7 900 ₽',period:'',description:'4 места для команды',featured:false,features:['4 билета Live','Общая зона','Подарочный набор'],buttonText:'Для команды',buttonLink:'#contact'}]},{anchor:'tickets',showInNav:true,navLabel:'Билеты'}),")
+          s = s.replace("blk('faq',{eyebrow:'FAQ',title:'Перед тем как прийти'}),", "blk('faq',{eyebrow:'FAQ',title:'Перед тем как прийти',items:[{question:'Где пройдёт событие?',answer:'Точный адрес пространства придёт на почту после регистрации. Площадка находится в центре города.'},{question:'Будет ли запись?',answer:'Да. Запись доступна владельцам Online и Live билетов в течение 7 дней.'},{question:'Можно вернуть билет?',answer:'Да, возврат доступен не позднее чем за 72 часа до начала события.'}]}),")
+
+          # Upgrade only a completely untouched legacy default project. Edited projects are never replaced.
+          needle = "const boot = () => {\n    renderGallery();"
+          repl = "const boot = () => {\n    const state = getState();\n    const legacy = state.current;\n    const untouchedLegacy = legacy && legacy.name === 'Бизнес-сайт' && legacy.site?.header?.logoText === 'NOVA' && !legacy.site?.customCss && legacy.blocks?.[0]?.data?.title === 'Сайт, который хочется запомнить';\n    if (untouchedLegacy && !sessionStorage.getItem('siteforge_v83_migrated')) {\n      const next = templates.find(t => t.id === 'business').build();\n      next.id = state.activeId; next.createdAt = legacy.createdAt || Date.now();\n      state.map[state.activeId] = next;\n      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.map));\n      sessionStorage.setItem('siteforge_v83_migrated','1');\n      location.reload(); return;\n    }\n    renderGallery();"
+          if needle not in s:
+              raise SystemExit('boot marker missing')
+          s = s.replace(needle, repl, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Validate
+        run: node --check v8-premium-templates.js
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v8-premium-templates.js
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Polish premium template content and starter migration"
+          git push origin main
