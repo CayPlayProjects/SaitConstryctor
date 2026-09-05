@@ -177,9 +177,17 @@
   const boot = () => {
     const state = getState();
     const legacy = state.current;
-    const untouchedLegacy = legacy && legacy.name === 'Бизнес-сайт' && legacy.site?.header?.logoText === 'NOVA' && !legacy.site?.customCss && legacy.blocks?.[0]?.data?.title === 'Сайт, который хочется запомнить';
-    if (untouchedLegacy && !sessionStorage.getItem('siteforge_v83_migrated')) {
-      const next = templates.find(t => t.id === 'business').build();
+    const legacySignatures = [
+      ['business','Бизнес-сайт','NOVA','Сайт, который хочется запомнить'],
+      ['portfolio','Портфолио','PORTFOLIO','Я создаю цифровые продукты и яркие истории'],
+      ['product','Продукт','FLOW','Меньше рутины. Больше результата.'],
+      ['event','Событие','DIGITAL NIGHT','Digital Night 2026']
+    ];
+    const legacyMatch = legacy && !legacy.site?.customCss && legacySignatures.find(([,projectName,logo,title]) =>
+      legacy.name === projectName && legacy.site?.header?.logoText === logo && legacy.blocks?.[0]?.data?.title === title
+    );
+    if (legacyMatch && !sessionStorage.getItem('siteforge_v83_migrated')) {
+      const next = templates.find(t => t.id === legacyMatch[0]).build();
       next.id = state.activeId; next.createdAt = legacy.createdAt || Date.now();
       state.map[state.activeId] = next;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.map));
