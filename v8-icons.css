@@ -1,0 +1,90 @@
+/* SiteForge v8 — unified SVG icon system */
+.sf-icon {
+  width: 1em;
+  height: 1em;
+  display: block;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.icon-btn .sf-icon,
+.v8-sheet-close .sf-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-btn.small .sf-icon,
+.structure-action .sf-icon,
+.mini-action .sf-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.device-btn {
+  gap: 8px !important;
+}
+.device-btn .sf-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.9;
+}
+.device-btn.active .sf-icon {
+  filter: drop-shadow(0 0 7px rgba(255,255,255,.16));
+}
+
+.search-box > .sf-icon,
+.v8-command-head > .sf-icon {
+  width: 18px;
+  height: 18px;
+  color: #94a7d4;
+}
+
+.structure-handle .sf-icon {
+  width: 18px;
+  height: 18px;
+  color: #7788ae;
+}
+
+.v8-command-icon {
+  display: grid !important;
+  place-items: center;
+}
+.v8-command-icon .sf-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.sf-icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.sf-icon-text > .sf-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.add-item-btn .sf-icon,
+#newProjectBtn .sf-icon,
+#v8AddFab .sf-icon,
+#v8CheckFab .sf-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.v8-sheet-close,
+.icon-btn[data-close-modal],
+#rightCloseBtn {
+  display: inline-grid !important;
+  place-items: center !important;
+}
+
+@media (max-width: 760px) {
+  .device-btn { gap: 6px !important; }
+  .device-btn .sf-icon { width: 16px; height: 16px; }
+}
