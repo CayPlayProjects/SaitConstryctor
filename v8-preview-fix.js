@@ -13,15 +13,19 @@
     return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name]}</svg>`;
   }
 
-  function dockBottomUi() {
-    const workspace = $('.workspace');
+  /*
+   * IMPORTANT: keep the v8 status bar OUTSIDE #appShell.
+   * v8-enhancements.js observes #appShell with MutationObserver. Moving the
+   * status bar inside it creates a feedback loop because updateStatus() writes
+   * into that same observed subtree. We only consolidate the floating actions
+   * into the status bar, which was originally created as a direct body child.
+   */
+  function prepareBottomUi() {
     const status = $('#v8Statusbar');
-    if (!workspace || !status) return false;
+    if (!status) return false;
 
-    if (!status.classList.contains('v8-statusbar-docked')) {
-      status.classList.add('v8-statusbar-docked');
-      workspace.appendChild(status);
-    }
+    status.classList.remove('v8-statusbar-docked');
+    status.classList.add('v8-statusbar-safe');
 
     const fab = $('.v8-fab');
     const rightGroup = status.querySelector('.v8-status-group:last-child');
@@ -37,6 +41,7 @@
   }
 
   function setPreviewDevice(modal, mode) {
+    if (!modal || !['desktop', 'tablet', 'mobile'].includes(mode)) return;
     modal.dataset.previewDevice = mode;
     modal.querySelectorAll('[data-preview-device]').forEach(btn => {
       const active = btn.dataset.previewDevice === mode;
@@ -81,12 +86,15 @@
     const syncOpenState = () => {
       const open = !modal.hidden;
       document.body.classList.toggle('v8-preview-open', open);
-      if (open) setPreviewDevice(modal, 'desktop');
+      if (open && !modal.dataset.previewDevice) setPreviewDevice(modal, 'desktop');
     };
 
     if (!modal.dataset.previewObserverReady) {
       modal.dataset.previewObserverReady = '1';
-      new MutationObserver(syncOpenState).observe(modal, { attributes: true, attributeFilter: ['hidden'] });
+      new MutationObserver(syncOpenState).observe(modal, {
+        attributes: true,
+        attributeFilter: ['hidden']
+      });
     }
 
     syncOpenState();
@@ -96,16 +104,16 @@
   function boot() {
     enhancePreview();
 
-    if (!dockBottomUi()) {
+    if (!prepareBottomUi()) {
       const observer = new MutationObserver(() => {
-        if (dockBottomUi()) observer.disconnect();
+        if (prepareBottomUi()) observer.disconnect();
       });
-      observer.observe(document.body, { childList: true, subtree: true });
+      observer.observe(document.body, { childList: true });
       setTimeout(() => observer.disconnect(), 5000);
     }
 
-    setTimeout(dockBottomUi, 80);
-    setTimeout(dockBottomUi, 240);
+    setTimeout(prepareBottomUi, 80);
+    setTimeout(prepareBottomUi, 240);
   }
 
   if (document.readyState === 'loading') {
