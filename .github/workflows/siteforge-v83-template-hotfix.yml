@@ -1,0 +1,56 @@
+name: SiteForge v8.3 template hotfix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/siteforge-v83-template-hotfix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Patch hero renderer and connect premium templates
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          app = Path('app.js')
+          text = app.read_text(encoding='utf-8')
+          old = 'return `<section ${common} style="${blockStyle(block,site)}--hero-bg:${heroBg};--hero-min:${Number(d.minHeight)||680}px;">'
+          new = 'return `<section id="${escapeHtml(block.anchor)}" class="sf-section sf-type-${block.type}" style="${blockStyle(block,site)}--hero-bg:${heroBg};--hero-min:${Number(d.minHeight)||680}px;"${attr}>'
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif '--hero-bg:${heroBg}' not in text:
+              raise SystemExit('Hero renderer not found')
+          app.write_text(text, encoding='utf-8')
+
+          index = Path('index.html')
+          html = index.read_text(encoding='utf-8')
+          if 'v8-premium-templates.css' not in html:
+              html = html.replace('</head>', '  <link rel="stylesheet" href="v8-premium-templates.css?v=20260905-1" />\n</head>')
+          if 'v8-premium-templates.js' not in html:
+              html = html.replace('</body>', '  <script src="v8-premium-templates.js?v=20260905-1"></script>\n</body>')
+          index.write_text(html, encoding='utf-8')
+          PY
+      - name: Validate JavaScript
+        run: |
+          node --check app.js
+          node --check v8-premium-templates.js
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app.js index.html
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "Fix hero rendering and enable premium templates"
+          git push origin main
