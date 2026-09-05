@@ -1324,7 +1324,13 @@ ${footer}
       }
     });
 
-    window.addEventListener('beforeunload', persistNow);
+    window.addEventListener('beforeunload', () => {
+      if (sessionStorage.getItem('siteforge_skip_beforeunload_persist') === '1') {
+        sessionStorage.removeItem('siteforge_skip_beforeunload_persist');
+        return;
+      }
+      persistNow();
+    });
   }
 
   function init() {

@@ -138,6 +138,7 @@
       if (current?.name && current.name !== 'Новый сайт') next.name = current.name;
     }
     map[next.id] = next;
+    sessionStorage.setItem('siteforge_skip_beforeunload_persist', '1');
     localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
     localStorage.setItem(ACTIVE_KEY, next.id);
     location.reload();
