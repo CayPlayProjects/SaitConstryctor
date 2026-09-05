@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = 7;
+  const APP_VERSION = 8;
   const STORAGE_KEY = 'siteforge_v7_projects';
   const ACTIVE_KEY = 'siteforge_v7_active_project';
   const MAX_HISTORY = 80;
