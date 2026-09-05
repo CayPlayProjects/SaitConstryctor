@@ -996,7 +996,7 @@
         let heroBg = `linear-gradient(135deg, ${d.background}, ${d.background2})`;
         if (d.backgroundMode === 'color') heroBg = d.background;
         if (d.backgroundMode === 'image' && d.image) heroBg = `linear-gradient(rgba(0,0,0,${(d.overlay||0)/100}),rgba(0,0,0,${(d.overlay||0)/100})),url('${String(d.image).replaceAll("'","%27")}') center/cover no-repeat`;
-        return `<section ${common} style="${blockStyle(block,site)}--hero-bg:${heroBg};--hero-min:${Number(d.minHeight)||680}px;">
+        return `<section id="${escapeHtml(block.anchor)}" class="sf-section sf-type-${block.type}" style="${blockStyle(block,site)}--hero-bg:${heroBg};--hero-min:${Number(d.minHeight)||680}px;"${attr}>
           <div class="sf-container sf-hero sf-align-${d.align || 'left'}">
             <div class="sf-hero-copy">${renderEyebrow(d.eyebrow)}<h1>${escapeHtml(d.title)}</h1><div class="sf-lead">${paragraphs(d.text)}</div>
               <div class="sf-actions"><a class="sf-btn sf-btn-primary" href="${escapeHtml(safeUrl(d.primaryLink))}">${escapeHtml(d.primaryText)}</a>${d.showSecondary ? `<a class="sf-btn sf-btn-secondary" href="${escapeHtml(safeUrl(d.secondaryLink))}">${escapeHtml(d.secondaryText)}</a>` : ''}</div>
