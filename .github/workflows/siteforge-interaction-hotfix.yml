@@ -20,82 +20,42 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-
           app = Path('app.js')
           text = app.read_text(encoding='utf-8')
-
           old_close = "    $('#rightCloseBtn').addEventListener('click', () => $('#rightSidebar').classList.remove('open'));"
-          new_close = """    $('#rightCloseBtn').addEventListener('click', () => {
-      const right = $('#rightSidebar');
-      if (window.innerWidth <= 980) right.classList.remove('open');
-      else document.body.classList.add('v8-right-collapsed');
-    });"""
+          new_close = "    $('#rightCloseBtn').addEventListener('click', () => {\n      const right = $('#rightSidebar');\n      if (window.innerWidth <= 980) right.classList.remove('open');\n      else document.body.classList.add('v8-right-collapsed');\n    });"
           if old_close in text:
               text = text.replace(old_close, new_close, 1)
           elif new_close not in text:
               raise SystemExit('rightCloseBtn patch target not found')
-
           old_select = "    if (window.innerWidth <= 980) $('#rightSidebar').classList.add('open');\n    postSelectionToPreview();"
           new_select = "    if (window.innerWidth <= 980) $('#rightSidebar').classList.add('open');\n    else document.body.classList.remove('v8-right-collapsed');\n    postSelectionToPreview();"
           if old_select in text:
               text = text.replace(old_select, new_select, 1)
           elif new_select not in text:
               raise SystemExit('selectBlock reopen patch target not found')
-
           old_settings = "    if (window.innerWidth <= 980) $('#rightSidebar').classList.add('open');\n  }\n\n  function setupEvents()"
           new_settings = "    if (window.innerWidth <= 980) $('#rightSidebar').classList.add('open');\n    else document.body.classList.remove('v8-right-collapsed');\n  }\n\n  function setupEvents()"
           if old_settings in text:
               text = text.replace(old_settings, new_settings, 1)
           elif new_settings not in text:
               raise SystemExit('page settings reopen patch target not found')
-
           old_key = "      else if (!typing && e.key === 'Delete' && selectedBlock()) deleteBlock(selectedBlockId);"
-          new_key = """      else if (!typing && (e.key === 'Delete' || e.key === 'Backspace') && selectedBlock()) {
-        e.preventDefault();
-        deleteBlock(selectedBlockId);
-      }"""
+          new_key = "      else if (!typing && (e.key === 'Delete' || e.key === 'Backspace') && selectedBlock()) {\n        e.preventDefault();\n        deleteBlock(selectedBlockId);\n      }"
           if old_key in text:
               text = text.replace(old_key, new_key, 1)
           elif new_key not in text:
               raise SystemExit('Delete/Backspace patch target not found')
-
           old_escape = "      else if (e.key === 'Escape') { closeModals(); $('#leftSidebar').classList.remove('open'); $('#rightSidebar').classList.remove('open'); }"
           new_escape = "      else if (e.key === 'Escape') { closeModals(); $('#leftSidebar').classList.remove('open'); $('#rightSidebar').classList.remove('open'); if (window.innerWidth > 980) document.body.classList.add('v8-right-collapsed'); }"
           if old_escape in text:
               text = text.replace(old_escape, new_escape, 1)
-
           app.write_text(text, encoding='utf-8')
-
           css = Path('v8-layout-fix.css')
           ctext = css.read_text(encoding='utf-8')
           marker = '/* SiteForge v8 — right inspector desktop collapse */'
           if marker not in ctext:
-              ctext += r'''
-
-/* SiteForge v8 — right inspector desktop collapse */
-@media (min-width: 981px) {
-  .app-shell {
-    transition: grid-template-columns .2s ease;
-  }
-
-  .sidebar-right {
-    transition: opacity .18s ease, transform .2s ease, border-color .18s ease;
-    min-width: 0;
-  }
-
-  body.v8-right-collapsed .app-shell {
-    grid-template-columns: var(--left) minmax(0, 1fr) 0 !important;
-  }
-
-  body.v8-right-collapsed .sidebar-right {
-    opacity: 0;
-    transform: translateX(100%);
-    pointer-events: none;
-    overflow: hidden;
-    border-left-color: transparent !important;
-  }
-}
-'''
+              ctext += "\n\n/* SiteForge v8 — right inspector desktop collapse */\n@media (min-width: 981px) {\n  .app-shell { transition: grid-template-columns .2s ease; }\n  .sidebar-right { transition: opacity .18s ease, transform .2s ease, border-color .18s ease; min-width: 0; }\n  body.v8-right-collapsed .app-shell { grid-template-columns: var(--left) minmax(0, 1fr) 0 !important; }\n  body.v8-right-collapsed .sidebar-right { opacity: 0; transform: translateX(100%); pointer-events: none; overflow: hidden; border-left-color: transparent !important; }\n}\n"
               css.write_text(ctext, encoding='utf-8')
           PY
       - name: Commit hotfix
