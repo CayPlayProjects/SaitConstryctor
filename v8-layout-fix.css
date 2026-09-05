@@ -1,0 +1,99 @@
+/* SiteForge v8 — workspace toolbar layout hotfix */
+
+/* The legacy v7 workspace reserved only 50px for the toolbar.
+   v8 uses larger controls, so the toolbar must get its own taller grid row. */
+.workspace {
+  grid-template-rows: 72px minmax(0, 1fr) !important;
+  overflow: hidden;
+}
+
+.workspace-toolbar {
+  height: 72px !important;
+  min-height: 72px !important;
+  padding: 8px 18px !important;
+  box-sizing: border-box;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+  z-index: 5;
+}
+
+.device-switch {
+  min-height: 48px;
+  height: 48px;
+  padding: 3px !important;
+  align-self: center;
+  box-sizing: border-box;
+}
+
+.device-btn {
+  height: 40px !important;
+  min-height: 40px !important;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workspace-status,
+.zoom-controls {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.zoom-controls {
+  gap: 4px;
+}
+
+.zoom-controls .icon-btn.small,
+.zoom-value {
+  flex: 0 0 auto;
+}
+
+.canvas-area {
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Compact mode must keep the corrected toolbar height as well. */
+body.v8-compact .workspace {
+  grid-template-rows: 68px minmax(0, 1fr) !important;
+}
+body.v8-compact .workspace-toolbar {
+  height: 68px !important;
+  min-height: 68px !important;
+  padding-block: 7px !important;
+}
+
+@media (max-width: 1180px) {
+  .workspace {
+    grid-template-rows: 68px minmax(0, 1fr) !important;
+  }
+  .workspace-toolbar {
+    height: 68px !important;
+    min-height: 68px !important;
+    padding: 7px 12px !important;
+  }
+  .device-switch {
+    height: 46px;
+    min-height: 46px;
+  }
+  .device-btn {
+    height: 38px !important;
+    min-height: 38px !important;
+    padding-inline: 12px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .workspace {
+    grid-template-rows: auto minmax(0, 1fr) !important;
+  }
+  .workspace-toolbar {
+    height: auto !important;
+    min-height: 64px !important;
+    padding: 8px 10px !important;
+  }
+}
