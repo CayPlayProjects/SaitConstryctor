@@ -97,3 +97,12 @@ body.v8-compact .workspace-toolbar {
     padding: 8px 10px !important;
   }
 }
+
+
+/* SiteForge v8 — right inspector desktop collapse */
+@media (min-width: 981px) {
+  .app-shell { transition: grid-template-columns .2s ease; }
+  .sidebar-right { transition: opacity .18s ease, transform .2s ease, border-color .18s ease; min-width: 0; }
+  body.v8-right-collapsed .app-shell { grid-template-columns: var(--left) minmax(0, 1fr) 0 !important; }
+  body.v8-right-collapsed .sidebar-right { opacity: 0; transform: translateX(100%); pointer-events: none; overflow: hidden; border-left-color: transparent !important; }
+}

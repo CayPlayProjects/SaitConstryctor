@@ -434,6 +434,7 @@
     renderStructure();
     renderInspector();
     if (window.innerWidth <= 980) $('#rightSidebar').classList.add('open');
+    else document.body.classList.remove('v8-right-collapsed');
     postSelectionToPreview();
   }
 
@@ -1183,6 +1184,7 @@ ${footer}
     $$('.inspector-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.inspectorTab === inspectorTab));
     renderStructure(); renderInspector(); postSelectionToPreview();
     if (window.innerWidth <= 980) $('#rightSidebar').classList.add('open');
+    else document.body.classList.remove('v8-right-collapsed');
   }
 
   function setupEvents() {
@@ -1299,7 +1301,11 @@ ${footer}
     $('#zoomResetBtn').addEventListener('click', () => setZoom(1));
 
     $('#mobileMenuBtn').addEventListener('click', () => $('#leftSidebar').classList.toggle('open'));
-    $('#rightCloseBtn').addEventListener('click', () => $('#rightSidebar').classList.remove('open'));
+    $('#rightCloseBtn').addEventListener('click', () => {
+      const right = $('#rightSidebar');
+      if (window.innerWidth <= 980) right.classList.remove('open');
+      else document.body.classList.add('v8-right-collapsed');
+    });
 
     window.addEventListener('message', (e) => {
       if (e.data?.type === 'siteforge-block-click' && e.data.id) selectBlock(e.data.id);
@@ -1311,8 +1317,11 @@ ${footer}
       else if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) { e.preventDefault(); redo(); }
       else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); persistNow(); toast('Проект сохранён', 'Локальная копия обновлена.', 'success'); }
       else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'e') { e.preventDefault(); exportHtml(); }
-      else if (e.key === 'Escape') { closeModals(); $('#leftSidebar').classList.remove('open'); $('#rightSidebar').classList.remove('open'); }
-      else if (!typing && e.key === 'Delete' && selectedBlock()) deleteBlock(selectedBlockId);
+      else if (e.key === 'Escape') { closeModals(); $('#leftSidebar').classList.remove('open'); $('#rightSidebar').classList.remove('open'); if (window.innerWidth > 980) document.body.classList.add('v8-right-collapsed'); }
+      else if (!typing && (e.key === 'Delete' || e.key === 'Backspace') && selectedBlock()) {
+        e.preventDefault();
+        deleteBlock(selectedBlockId);
+      }
     });
 
     window.addEventListener('beforeunload', persistNow);
