@@ -292,7 +292,7 @@ v8 → «Экспорт проекта JSON»  →  v9 → «Импорт JSON»
 
 **Текущая версия: 9.0.0 «Aurora»**
 
-**CayPlay / CayPlayProjects** · 2026
+**SayPlayMedia / CayPlayProjects** · 2026
 
 Все права защищены · [README](README.md)
 
